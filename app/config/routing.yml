@@ -1,0 +1,4 @@
+interim_informatique:
+    resource: "@InterimInformatiqueBundle/Resources/config/routing.yml"
+    prefix:   /
+
