@@ -86,24 +86,24 @@ class Job
     private $contractEndDate;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skills", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skill", cascade={"persist"})
      */
     private $skills;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\DiplomaLevel")
+     * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\DiplomaLevel")
      */
-    private $diplomaLevel;
+    private $diplomaLevels;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\Company")
      */
     private $company;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\KindContract")
      */
-    private $kindcontracts;
+    private $kindContracts;
 
     /**
      * Get id
@@ -277,6 +277,16 @@ class Job
     }
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->diplomaLevels = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->kindContracts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Set contractStartDate
      *
      * @param \DateTime $contractStartDate
@@ -323,20 +333,12 @@ class Job
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Add skills
      *
-     * @param \Interim\InformatiqueBundle\Skills $skills
+     * @param \Interim\InformatiqueBundle\Entity\Skill $skills
      * @return Job
      */
-    public function addSkill(\Interim\InformatiqueBundle\Skills $skills)
+    public function addSkill(\Interim\InformatiqueBundle\Entity\Skill $skills)
     {
         $this->skills[] = $skills;
 
@@ -346,9 +348,9 @@ class Job
     /**
      * Remove skills
      *
-     * @param \Interim\InformatiqueBundle\Skills $skills
+     * @param \Interim\InformatiqueBundle\Entity\Skill $skills
      */
-    public function removeSkill(\Interim\InformatiqueBundle\Skills $skills)
+    public function removeSkill(\Interim\InformatiqueBundle\Entity\Skill $skills)
     {
         $this->skills->removeElement($skills);
     }
@@ -364,26 +366,36 @@ class Job
     }
 
     /**
-     * Set diplomaLevel
+     * Add diplomaLevels
      *
-     * @param \Interim\InformatiqueBundle\DiplomaLevel $diplomaLevel
+     * @param \Interim\InformatiqueBundle\Entity\DiplomaLevel $diplomaLevels
      * @return Job
      */
-    public function setDiplomaLevel(\Interim\InformatiqueBundle\DiplomaLevel $diplomaLevel = null)
+    public function addDiplomaLevel(\Interim\InformatiqueBundle\Entity\DiplomaLevel $diplomaLevels)
     {
-        $this->diplomaLevel = $diplomaLevel;
+        $this->diplomaLevels[] = $diplomaLevels;
 
         return $this;
     }
 
     /**
-     * Get diplomaLevel
+     * Remove diplomaLevels
      *
-     * @return \Interim\InformatiqueBundle\DiplomaLevel 
+     * @param \Interim\InformatiqueBundle\Entity\DiplomaLevel $diplomaLevels
      */
-    public function getDiplomaLevel()
+    public function removeDiplomaLevel(\Interim\InformatiqueBundle\Entity\DiplomaLevel $diplomaLevels)
     {
-        return $this->diplomaLevel;
+        $this->diplomaLevels->removeElement($diplomaLevels);
+    }
+
+    /**
+     * Get diplomaLevels
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDiplomaLevels()
+    {
+        return $this->diplomaLevels;
     }
 
     /**
@@ -410,35 +422,36 @@ class Job
     }
 
     /**
-     * Add kindcontracts
+     * Add kindContracts
      *
-     * @param \Interim\InformatiqueBundle\Entity\KindContract $kindcontracts
+     * @param \Interim\InformatiqueBundle\Entity\KindContract $kindContracts
      * @return Job
      */
-    public function addKindcontract(\Interim\InformatiqueBundle\Entity\KindContract $kindcontracts)
+    public function addKindContract(\Interim\InformatiqueBundle\Entity\KindContract $kindContracts)
     {
-        $this->kindcontracts[] = $kindcontracts;
+        $this->kindContracts[] = $kindContracts;
 
         return $this;
     }
 
     /**
-     * Remove kindcontracts
+     * Remove kindContracts
      *
-     * @param \Interim\InformatiqueBundle\Entity\KindContract $kindcontracts
+     * @param \Interim\InformatiqueBundle\Entity\KindContract $kindContracts
      */
-    public function removeKindcontract(\Interim\InformatiqueBundle\Entity\KindContract $kindcontracts)
+    public function removeKindContract(\Interim\InformatiqueBundle\Entity\KindContract $kindContracts)
     {
-        $this->kindcontracts->removeElement($kindcontracts);
+        $this->kindContracts->removeElement($kindContracts);
     }
 
     /**
-     * Get kindcontracts
+     * Get kindContracts
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getKindcontracts()
+    public function getKindContracts()
     {
-        return $this->kindcontracts;
+        return $this->kindContracts;
     }
+
 }

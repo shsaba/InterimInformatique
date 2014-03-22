@@ -5,12 +5,12 @@ namespace Interim\InformatiqueBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Skills
+ * Skill
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\SkillsRepository")
+ * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\SkillRepository")
  */
-class Skills
+class Skill
 {
     /**
      * @var integer
@@ -43,7 +43,7 @@ class Skills
      * Set name
      *
      * @param string $name
-     * @return Skills
+     * @return Skill
      */
     public function setName($name)
     {

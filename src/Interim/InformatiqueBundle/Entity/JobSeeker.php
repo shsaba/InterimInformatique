@@ -121,7 +121,7 @@ class JobSeeker
     private $diplomas;
     
     /**
-     * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skills", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skill", cascade={"persist"})
      */
     private $skills;
     
