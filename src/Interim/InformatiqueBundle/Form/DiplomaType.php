@@ -16,7 +16,7 @@ class DiplomaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('name')
+                ->add('name', 'text')
                 ->add('diplomaLevel', 'entity', array(
                     'class' => 'InterimInformatiqueBundle:DiplomaLevel',
                     'property' => 'name',

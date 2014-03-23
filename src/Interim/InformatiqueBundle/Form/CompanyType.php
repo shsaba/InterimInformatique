@@ -16,17 +16,17 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('name')
-                ->add('address')
-                ->add('city')
-                ->add('zipCode')
-                ->add('logo')
-                ->add('description')
-                ->add('contactName')
-                ->add('contactSurname')
-                ->add('contactMail')
-                ->add('idNumber')
-                ->add('password')
+                ->add('name', 'text')
+                ->add('address', 'textarea')
+                ->add('city', 'text')
+                ->add('zipCode', 'text')
+                ->add('logo', 'file')
+                ->add('description', 'textarea')
+                ->add('contactName', 'text')
+                ->add('contactSurname', 'text')
+                ->add('contactMail', 'email')
+                ->add('idNumber', 'text')
+                ->add('password', 'password')
                 ->add('businessSector', 'entity', array(
                     'class' => 'InterimInformatiqueBundle:BusinessSector',
                     'property' => 'name',

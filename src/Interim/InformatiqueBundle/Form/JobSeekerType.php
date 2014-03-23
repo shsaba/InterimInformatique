@@ -15,18 +15,18 @@ class JobSeekerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('surname')
-            ->add('mail')
-            ->add('address')
-            ->add('city')
-            ->add('zipCode')
-            ->add('dateOfBirth')
-            ->add('cv')
-            ->add('username')
-            ->add('password')
-            ->add('phoneNumber')
-            ->add('available')
+            ->add('name', 'text')
+            ->add('surname', 'text')
+            ->add('mail', 'email')
+            ->add('address', 'textarea')
+            ->add('city', 'text')
+            ->add('zipCode', 'text')
+            ->add('dateOfBirth', 'date')
+            ->add('cv', 'file')
+            ->add('username', 'text')
+            ->add('password', 'password')
+            ->add('phoneNumber', 'text')
+            ->add('available', 'checkbox')
             ->add('employee', 'entity', array(
                     'class' => 'InterimInformatiqueBundle:Employee',
                     'property' => 'name',

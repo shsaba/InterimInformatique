@@ -15,11 +15,11 @@ class EmployeeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('surname')
-            ->add('mail')
-            ->add('idNumber')
-            ->add('password')
+            ->add('name', 'text')
+            ->add('surname', 'text')
+            ->add('mail', 'email')
+            ->add('idNumber', 'text')
+            ->add('password', 'password')
         ;
     }
     
