@@ -24,7 +24,7 @@ class MeetingEmployeeJobSeekerType extends AbstractType
                     'class' => 'InterimInformatiqueBundle:JobSeeker',
                     'property' => 'name',
                     'multiple' => false))
-                ->add('date', 'date')
+                ->add('date', 'datetime')
                 ->add('note', 'textarea')
         ;
     }
