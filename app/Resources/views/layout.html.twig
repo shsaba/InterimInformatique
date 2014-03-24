@@ -21,6 +21,11 @@
             </div>
             {% block body %}{% endblock %}
         </div>
-        {% block javascripts %}{% endblock %}
+            {% javascripts
+                'js/jquery.min.js'
+                'js/bootstrap.min.js' %}
+              <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
     </body>
 </html>
