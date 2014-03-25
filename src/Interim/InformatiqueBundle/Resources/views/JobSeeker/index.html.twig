@@ -4,7 +4,15 @@
 
 {% block body %}
 
+{% for message in app.session.flashbag.get('info') %}
+    <p class="bg-success">{{ message }}</p>
+{% endfor %}
 
+<div class="row" id="btns">
+    <div class="col-xs-12">
+        <a href="{{ path('interim_informatique_add_jobseeker') }}" class="btn btn-primary btn-sm">Ajouter un collaborateur</a>
+    </div>
+</div>
 <table class="table">
     <thead>
         <tr>

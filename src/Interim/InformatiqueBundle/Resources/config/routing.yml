@@ -3,6 +3,7 @@ interim_informatique_homepage:
     pattern:  /
     defaults: { _controller: InterimInformatiqueBundle:Front:index }
 
+
 # Jobs seekers
 interim_informatique_jobseekers:
     pattern:  /collaborateurs
@@ -13,17 +14,27 @@ interim_informatique_add_jobseeker:
     defaults: { _controller: InterimInformatiqueBundle:JobSeeker:add }
 
 
-interim_informatique_jobseeker:
+interim_informatique_infos_jobseeker:
     pattern:  /collaborateur/{id}
     defaults: { _controller: InterimInformatiqueBundle:JobSeeker:see }
     requirements:
         id : \d+
+
 
 # Companies
 interim_informatique_companies:
     pattern:  /entreprises
     defaults: { _controller: InterimInformatiqueBundle:Company:index }
 
+interim_informatique_add_company:
+    pattern:  /entreprise/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:Company:add }
+
+interim_informatique_infos_company:
+    pattern:  /entreprise/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Company:infos }
+    requirements:
+        id : \d+
 
 # Jobs
 interim_informatique_jobs:
@@ -32,7 +43,7 @@ interim_informatique_jobs:
 
 
 
-# List
+# Configuration Routing
 
 interim_informatique_configuration_employees:
     pattern:  /configuration/employes
@@ -53,6 +64,10 @@ interim_informatique_configuration_kind_contracts:
 interim_informatique_configuration_diplomas:
     pattern:  /configuration/diplomes
     defaults: { _controller: InterimInformatiqueBundle:Diploma:index }
+    
+interim_informatique_configuration_diplomas_levels:
+    pattern:  /configuration/niveaux-diplomes
+    defaults: { _controller: InterimInformatiqueBundle:DiplomaLevel:index }
 
 interim_informatique_configuration_companies:
     pattern:  /configuration/entreprises
@@ -77,13 +92,15 @@ interim_informatique_configuration_add_diploma:
     pattern:  /configuration/diplome/ajouter
     defaults: { _controller: InterimInformatiqueBundle:Diploma:add }
 
+interim_informatique_configuration_add_diploma_level:
+    pattern:  /configuration/niveau-diplome/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:DiplomaLevel:add }
+
 interim_informatique_configuration_add_skill:
     pattern:  /configuration/competence/ajouter
     defaults: { _controller: InterimInformatiqueBundle:Skill:add }
 
-interim_informatique_add_company:
-    pattern:  /entreprise/ajouter
-    defaults: { _controller: InterimInformatiqueBundle:Company:add }
+
 
 
 # Get infos
@@ -112,14 +129,14 @@ interim_informatique_configuration_infos_diploma:
     requirements:
         id : \d+
 
-interim_informatique_configuration_infos_skill:
-    pattern:  /configuration/competence/{id}
-    defaults: { _controller: InterimInformatiqueBundle:Skill:infos }
+interim_informatique_configuration_infos_diploma_level:
+    pattern:  /configuration/niveau-diplome/{id}
+    defaults: { _controller: InterimInformatiqueBundle:DiplomaLevel:infos }
     requirements:
         id : \d+
 
-interim_informatique_configuration_infos_company:
-    pattern:  /entreprise/{id}
-    defaults: { _controller: InterimInformatiqueBundle:Company:infos }
+interim_informatique_configuration_infos_skill:
+    pattern:  /configuration/competence/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Skill:infos }
     requirements:
         id : \d+

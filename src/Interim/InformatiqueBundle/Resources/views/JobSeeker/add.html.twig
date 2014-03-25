@@ -3,9 +3,14 @@
 {% block function %}Ajouter un collaborateur{% endblock %}
 
 {% block body %}
-<form method="post" {{ form_enctype(form) }}>
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_jobseekers') }}" class="btn btn-primary btn-sm">Retour</a></div>
+</div>
+<div class="row">
+    <form method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <input type="submit" class="btn btn-primary" />
-</form>
+        <input type="submit" class="btn btn-primary" />
+    </form>
+</div>
 
 {% endblock %}
