@@ -20,7 +20,7 @@ class CompanyType extends AbstractType
                 ->add('address', 'textarea')
                 ->add('city', 'text')
                 ->add('zipCode', 'text')
-                ->add('logo', 'file')
+                ->add('file', 'file')
                 ->add('description', 'textarea')
                 ->add('contactName', 'text')
                 ->add('contactSurname', 'text')

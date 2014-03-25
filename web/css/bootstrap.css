@@ -5790,3 +5790,8 @@ button.close {
     padding-top: 50px;
     background-color: #e0e7e8;
 }
+
+.container #btns{
+  margin-top: 15px;
+  text-align: right;
+}

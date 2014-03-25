@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Entreprises {{ parent() }}{% endblock %}
+{% block function %}Entreprises{% endblock %}
+
+{% block body %}
+
+{% for message in app.session.flashbag.get('info') %}
+    <p class="bg-success">{{ message }}</p>
+{% endfor %}
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Contact</th>
+            <th>Secteur</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+          {% for company in companies %}
+
+        <tr>
+            <td>{{ company.name }}</td>
+            <td>{{ company.contactName}} {{ company.contactSurname}}</td>
+            <td>{{ company.businessSector.name }} </td>
+            <td><a href="{{ asset(company.logo) }}" class="btn btn-default btn-xs">Logo</a></td>
+            <td><a href="{{ path('interim_informatique_configuration_infos_company', {id : company.id }) }}" class="btn btn-info btn-xs">Infos</a></td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

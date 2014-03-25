@@ -1,0 +1,40 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Diplômes {{ parent() }}{% endblock %}
+{% block function %}Diplômes{% endblock %}
+
+{% block body %}
+
+    {% for message in app.session.flashbag.get('info') %}
+<p class="bg-success">{{ message }}</p>
+    {% endfor %}
+
+
+<div class="row" id="btns">
+    <div class="col-xs-12">
+        <a href="{{ path('interim_informatique_configuration_add_diploma') }}" class="btn btn-primary btn-sm">Ajouter un diplôme</a>
+        <a href="{{ path('interim_informatique_configuration_add_diploma') }}" class="btn btn-primary btn-xs">Liste des niveaux</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Niveau</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+          {% for diploma in diplomas %}
+
+        <tr>
+            <td>{{ diploma.name }}</td>
+            <td>{{ diploma.diplomaLevel.name }}</td>
+            <td><a href="{{ path('interim_informatique_configuration_infos_diploma', {id : diploma.id }) }}" class="btn btn-info btn-xs">Infos</a></td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Collaborateurs {{ parent() }}{% endblock %}
+{% block function %}Collaborateurs{% endblock %}
+
+{% block body %}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Suivi par</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+          {% for jobSeeker in jobSeekers %}
+
+        <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

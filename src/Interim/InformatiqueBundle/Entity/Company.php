@@ -3,15 +3,18 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Company
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\CompanyRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Company
 {
+
     /**
      * @var integer
      *
@@ -55,6 +58,8 @@ class Company
      * @ORM\Column(name="logo", type="string", length=255)
      */
     private $logo;
+    private $file;
+    private $tempFilename;
 
     /**
      * @var text
@@ -97,20 +102,18 @@ class Company
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\BusinessSector")
      */
     private $businessSector;
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -120,8 +123,7 @@ class Company
      * @param string $name
      * @return Company
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -132,8 +134,7 @@ class Company
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -143,8 +144,7 @@ class Company
      * @param string $address
      * @return Company
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
 
         return $this;
@@ -155,8 +155,7 @@ class Company
      *
      * @return string 
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -166,8 +165,7 @@ class Company
      * @param string $city
      * @return Company
      */
-    public function setCity($city)
-    {
+    public function setCity($city) {
         $this->city = $city;
 
         return $this;
@@ -178,8 +176,7 @@ class Company
      *
      * @return string 
      */
-    public function getCity()
-    {
+    public function getCity() {
         return $this->city;
     }
 
@@ -189,8 +186,7 @@ class Company
      * @param integer $zipCode
      * @return Company
      */
-    public function setZipCode($zipCode)
-    {
+    public function setZipCode($zipCode) {
         $this->zipCode = $zipCode;
 
         return $this;
@@ -201,8 +197,7 @@ class Company
      *
      * @return integer 
      */
-    public function getZipCode()
-    {
+    public function getZipCode() {
         return $this->zipCode;
     }
 
@@ -212,8 +207,7 @@ class Company
      * @param string $logo
      * @return Company
      */
-    public function setLogo($logo)
-    {
+    public function setLogo($logo) {
         $this->logo = $logo;
 
         return $this;
@@ -224,9 +218,8 @@ class Company
      *
      * @return string 
      */
-    public function getLogo()
-    {
-        return $this->logo;
+    public function getLogo() {
+        return $this->getUploadDir() . '/' . $this->id . '.' . $this->logo;
     }
 
     /**
@@ -235,8 +228,7 @@ class Company
      * @param string $description
      * @return Company
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -247,8 +239,7 @@ class Company
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -258,8 +249,7 @@ class Company
      * @param string $contactName
      * @return Company
      */
-    public function setContactName($contactName)
-    {
+    public function setContactName($contactName) {
         $this->contactName = $contactName;
 
         return $this;
@@ -270,8 +260,7 @@ class Company
      *
      * @return string 
      */
-    public function getContactName()
-    {
+    public function getContactName() {
         return $this->contactName;
     }
 
@@ -281,8 +270,7 @@ class Company
      * @param string $contactSurname
      * @return Company
      */
-    public function setContactSurname($contactSurname)
-    {
+    public function setContactSurname($contactSurname) {
         $this->contactSurname = $contactSurname;
 
         return $this;
@@ -293,8 +281,7 @@ class Company
      *
      * @return string 
      */
-    public function getContactSurname()
-    {
+    public function getContactSurname() {
         return $this->contactSurname;
     }
 
@@ -304,8 +291,7 @@ class Company
      * @param string $contactMail
      * @return Company
      */
-    public function setContactMail($contactMail)
-    {
+    public function setContactMail($contactMail) {
         $this->contactMail = $contactMail;
 
         return $this;
@@ -316,8 +302,7 @@ class Company
      *
      * @return string 
      */
-    public function getContactMail()
-    {
+    public function getContactMail() {
         return $this->contactMail;
     }
 
@@ -327,8 +312,7 @@ class Company
      * @param string $idNumber
      * @return Company
      */
-    public function setIdNumber($idNumber)
-    {
+    public function setIdNumber($idNumber) {
         $this->idNumber = $idNumber;
 
         return $this;
@@ -339,8 +323,7 @@ class Company
      *
      * @return string 
      */
-    public function getIdNumber()
-    {
+    public function getIdNumber() {
         return $this->idNumber;
     }
 
@@ -350,8 +333,7 @@ class Company
      * @param string $password
      * @return Company
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -362,8 +344,7 @@ class Company
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -373,8 +354,7 @@ class Company
      * @param \Interim\InformatiqueBundle\Entity\BusinessSector $businessSector
      * @return Company
      */
-    public function setBusinessSector(\Interim\InformatiqueBundle\Entity\BusinessSector $businessSector = null)
-    {
+    public function setBusinessSector(\Interim\InformatiqueBundle\Entity\BusinessSector $businessSector = null) {
         $this->businessSector = $businessSector;
 
         return $this;
@@ -385,8 +365,79 @@ class Company
      *
      * @return \Interim\InformatiqueBundle\Entity\BusinessSector 
      */
-    public function getBusinessSector()
-    {
+    public function getBusinessSector() {
         return $this->businessSector;
     }
+
+    public function setFile(UploadedFile $file) {
+        $this->file = $file;
+
+        if (null !== $this->logo) {
+            $$this->tempFilename = $this->logo;
+            $this->logo = null;
+        }
+    }
+
+    public function getFile() {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload() {
+        if (null === $this->file) {
+            return;
+        }
+
+        $this->logo = $this->file->getClientOriginalName();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload() {
+        if (null === $this->file) {
+            return;
+        }
+
+        if (null !== $this->tempFilename) {
+            $oldFile = $this->getUploadRootDir() . '/' . $this->tempFilename;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $this->file->move(
+                $this->getUploadRootDir(), $this->id . '.' . $this->logo
+        );
+        $this->logo = $this->id . '.' . $this->logo;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function preRemoveUpload() {
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->logo;
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload() {
+        if (file_exists($this->tempFilename)) {
+            unlink($this->tempFilename);
+        }
+    }
+
+    public function getUploadDir() {
+        return 'uploads/logos/';
+    }
+
+    protected function getUploadRootDir() {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
 }

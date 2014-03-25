@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CompanyRepository extends EntityRepository
 {
+
+    public function getCompaniesWithBusinessSector() {
+        $qb = $this->createQueryBuilder('c')
+                ->leftJoin('c.businessSector', 'b')
+                ->addSelect('b')
+                ->orderBy('c.name', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

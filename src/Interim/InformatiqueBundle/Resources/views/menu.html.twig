@@ -7,40 +7,49 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">{{ project_name }}</a>
+            <a class="navbar-brand" href="{{ path('interim_informatique_homepage') }}">{{ project_name }}</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collaborateurs<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Afficher les collaborateurs</a></li>
-                        <li><a href="#">Ajouter un collaborateur</a></li>
+                        <li><a href="{{ path('interim_informatique_jobseekers') }}">Afficher les collaborateurs</a></li>
+                        <li><a href="{{ path('interim_informatique_add_jobseeker') }}">Ajouter un collaborateur</a></li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Offres<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Afficher les offres</a></li>
-                        <li><a href="#">Ajouter une offre</a></li>
+                        <li><a href="{{ path('interim_informatique_jobs') }}">Afficher les offres</a></li>
+                        <li><a href="{{ path('interim_informatique_add_company') }}">Ajouter une offre</a></li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entreprises<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Afficher les entreprises</a></li>
-                        <li><a href="#">Ajouter une entreprise</a></li>
+                        <li><a href="{{ path('interim_informatique_companies') }} ">Afficher les entreprises</a></li>
+                        <li><a href="{{ path('interim_informatique_add_company') }}">Ajouter une entreprise</a></li>
                     </ul>
                 </li>
-               
+
             </ul>
 
 
             <ul class="nav navbar-nav navbar-right">
-                 <li><a href="#">Configuration</a></li>
-                 <li><a href="#">Déconnexion</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('interim_informatique_configuration_employees') }} ">Gestion des exmployés</a></li>
+                        <li><a href="{{ path('interim_informatique_configuration_skills') }}">Gestion des compétences</a></li>
+                         <li><a href="{{ path('interim_informatique_configuration_business_sectors') }}">Gestion des secteurs</a></li>
+                          <li><a href="{{ path('interim_informatique_configuration_kind_contracts') }}">Gestion des contrats</a></li>
+                           <li><a href="{{ path('interim_informatique_configuration_diplomas') }}">Gestion des diplômes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Déconnexion</a></li>
             </ul>
         </div>
     </div>

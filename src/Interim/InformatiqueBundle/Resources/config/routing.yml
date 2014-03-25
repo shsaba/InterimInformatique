@@ -1,3 +1,125 @@
+# Home
 interim_informatique_homepage:
     pattern:  /
     defaults: { _controller: InterimInformatiqueBundle:Front:index }
+
+# Jobs seekers
+interim_informatique_jobseekers:
+    pattern:  /collaborateurs
+    defaults: { _controller: InterimInformatiqueBundle:JobSeeker:index }
+
+interim_informatique_add_jobseeker:
+    pattern:  /collaborateur/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:JobSeeker:add }
+
+
+interim_informatique_jobseeker:
+    pattern:  /collaborateur/{id}
+    defaults: { _controller: InterimInformatiqueBundle:JobSeeker:see }
+    requirements:
+        id : \d+
+
+# Companies
+interim_informatique_companies:
+    pattern:  /entreprises
+    defaults: { _controller: InterimInformatiqueBundle:Company:index }
+
+
+# Jobs
+interim_informatique_jobs:
+    pattern:  /offres
+    defaults: { _controller: InterimInformatiqueBundle:Job:index }
+
+
+
+# List
+
+interim_informatique_configuration_employees:
+    pattern:  /configuration/employes
+    defaults: { _controller: InterimInformatiqueBundle:Employee:index }
+
+interim_informatique_configuration_skills:
+    pattern:  /configuration/competences
+    defaults: { _controller: InterimInformatiqueBundle:Skill:index }
+
+interim_informatique_configuration_business_sectors:
+    pattern:  /configuration/secteurs-activites
+    defaults: { _controller: InterimInformatiqueBundle:BusinessSector:index }
+
+interim_informatique_configuration_kind_contracts:
+    pattern:  /configuration/types-de-contrats
+    defaults: { _controller: InterimInformatiqueBundle:KindContract:index }
+
+interim_informatique_configuration_diplomas:
+    pattern:  /configuration/diplomes
+    defaults: { _controller: InterimInformatiqueBundle:Diploma:index }
+
+interim_informatique_configuration_companies:
+    pattern:  /configuration/entreprises
+    defaults: { _controller: InterimInformatiqueBundle:Company:index }
+
+
+# Add
+
+interim_informatique_configuration_add_employee:
+    pattern:  /configuration/employe/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:Employee:add }
+    
+interim_informatique_configuration_add_business_sector:
+    pattern:  /configuration/secteur-activite/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:BusinessSector:add }
+
+interim_informatique_configuration_add_kind_contract:
+    pattern:  /configuration/type-de-contrat/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:KindContract:add }
+
+interim_informatique_configuration_add_diploma:
+    pattern:  /configuration/diplome/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:Diploma:add }
+
+interim_informatique_configuration_add_skill:
+    pattern:  /configuration/competence/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:Skill:add }
+
+interim_informatique_add_company:
+    pattern:  /entreprise/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:Company:add }
+
+
+# Get infos
+
+interim_informatique_configuration_infos_employee:
+    pattern:  /configuration/employe/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Employee:infos }
+    requirements:
+        id : \d+
+
+interim_informatique_configuration_infos_business_sector:
+    pattern:  /configuration/secteur-activite/{id}
+    defaults: { _controller: InterimInformatiqueBundle:BusinessSector:infos }
+    requirements:
+        id : \d+
+
+interim_informatique_configuration_infos_kind_contract:
+    pattern:  /configuration/type-de-contrat/{id}
+    defaults: { _controller: InterimInformatiqueBundle:BusinessSector:infos }
+    requirements:
+        id : \d+
+
+interim_informatique_configuration_infos_diploma:
+    pattern:  /configuration/diplome/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Diploma:infos }
+    requirements:
+        id : \d+
+
+interim_informatique_configuration_infos_skill:
+    pattern:  /configuration/competence/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Skill:infos }
+    requirements:
+        id : \d+
+
+interim_informatique_configuration_infos_company:
+    pattern:  /entreprise/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Company:infos }
+    requirements:
+        id : \d+

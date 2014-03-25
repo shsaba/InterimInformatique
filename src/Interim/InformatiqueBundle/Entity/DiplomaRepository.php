@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class DiplomaRepository extends EntityRepository
 {
+
+    public function getDiplomaWithLevel() {
+        $qb = $this->createQueryBuilder('d')
+                ->leftJoin('d.diplomaLevel', 'dl')
+                ->addSelect('dl')
+                ->orderBy('d.name', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

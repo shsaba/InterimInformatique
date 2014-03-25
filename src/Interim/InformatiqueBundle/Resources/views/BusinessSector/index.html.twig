@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Secteurs d'activités {{ parent() }}{% endblock %}
+{% block function %}Secteurs d'activités{% endblock %}
+
+{% block body %}
+
+{% for message in app.session.flashbag.get('info') %}
+    <p class="bg-success">{{ message }}</p>
+{% endfor %}
+
+
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_configuration_add_business_sector') }}" class="btn btn-primary btn-sm">Ajouter un secteur d'activité</a></div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+          {% for businessSector in businessSectors %}
+
+        <tr>
+            <td>{{ businessSector.name }}</td>
+            <td><a href="{{ path('interim_informatique_configuration_infos_business_sector', {id : businessSector.id }) }}" class="btn btn-info btn-xs">Infos</a></td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

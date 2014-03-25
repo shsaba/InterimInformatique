@@ -38,7 +38,7 @@ class JobSeekerType extends AbstractType
             ->add('skills', 'entity', array(
                     'class' => 'InterimInformatiqueBundle:Skill',
                     'property' => 'name',
-                    'multiple' => false))
+                    'multiple' => true))
         ;
     }
     

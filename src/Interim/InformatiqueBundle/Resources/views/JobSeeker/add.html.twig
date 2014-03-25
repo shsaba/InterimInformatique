@@ -1,0 +1,11 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Ajouter un collaborateur {{ parent() }}{% endblock %}
+{% block function %}Ajouter un collaborateur{% endblock %}
+
+{% block body %}
+<form method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+{% endblock %}
