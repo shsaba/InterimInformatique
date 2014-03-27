@@ -3,6 +3,9 @@
 {% block function %}Ajouter une entreprise{% endblock %}
 
 {% block body %}
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_companies') }}" class="btn btn-primary btn-sm">Retour</a></div>
+</div>
 <form method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <input type="submit" class="btn btn-primary" />

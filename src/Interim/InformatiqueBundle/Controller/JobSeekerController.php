@@ -49,9 +49,7 @@ class JobSeekerController extends Controller
     public function infosAction($id) {
         
         $em = $this->getDoctrine()->getManager();
-        
         $repo = $em->getRepository('InterimInformatiqueBundle:JobSeeker');
-        
         $jobSeeker = $repo->getJobSeekersInfos($id);
 
         return $this->render('InterimInformatiqueBundle:JobSeeker:infos.html.twig', array('jobSeeker' => $jobSeeker));

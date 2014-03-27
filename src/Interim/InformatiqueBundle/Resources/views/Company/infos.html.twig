@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Entreprise : {{ company.name }}  {{ parent() }}{% endblock %}
+{% block function %}Entreprise : {{ company.name }}{% endblock %}
+
+{% block body %}
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_companies') }}" class="btn btn-primary btn-sm">Retour</a></div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Nom / Secteur:</div>
+    <div class="col-xs-3">{{ company.name }}</div>
+     <div class="col-xs-3">{{ company.businessSector.name }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Infos :</div>
+    <div class="col-xs-9">{{ company.description }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Adresse complète :</div>
+    <div class="col-xs-3">{{ company.address }}</div>
+    <div class="col-xs-3">{{ company.city }}</div>
+    <div class="col-xs-3">{{ company.zipCode }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Contact :</div>
+    <div class="col-xs-3">{{ company.contactName }}</div>
+    <div class="col-xs-3">{{ company.contactSurname }}</div>
+    <div class="col-xs-3">{{ company.contactMail }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Logo:</div>
+    <div class="col-xs-3"><img src="{{ asset(company.logo) }}" /></div>
+</div>
+
+{% endblock %}

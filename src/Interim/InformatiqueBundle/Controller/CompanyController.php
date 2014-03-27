@@ -44,5 +44,14 @@ class CompanyController extends Controller
                         )
         );
     }
+    
+    public function infosAction($id) {
+        
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('InterimInformatiqueBundle:Company');
+        $company = $repo->getCompanyWithBusinessSector($id);
+
+        return $this->render('InterimInformatiqueBundle:Company:infos.html.twig', array('company' => $company));
+    }
 
 }

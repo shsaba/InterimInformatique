@@ -22,4 +22,17 @@ class CompanyRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getCompanyWithBusinessSector($id) {
+
+        $qb = $this->createQueryBuilder('c')
+                ->leftJoin('c.businessSector', 'b')
+                ->addSelect('b');
+
+        $qb->where('c.id = :id')
+                ->setParameter('id', $id);
+
+
+        return $qb->getQuery()->getSingleResult();
+    }
+
 }
