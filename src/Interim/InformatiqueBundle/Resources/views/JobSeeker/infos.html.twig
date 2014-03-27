@@ -1,0 +1,69 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Collaborateur : {{ jobSeeker.name }}  {{ parent() }}{% endblock %}
+{% block function %}Collaborateur : {{ jobSeeker.name }}{% endblock %}
+
+{% block body %}
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_jobseekers') }}" class="btn btn-primary btn-sm">Retour</a></div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Nom :</div>
+    <div class="col-xs-3">{{ jobSeeker.name }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Prénom :</div>
+    <div class="col-xs-3">{{ jobSeeker.surName }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Mail :</div>
+    <div class="col-xs-3">{{ jobSeeker.mail }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Adresse complète :</div>
+    <div class="col-xs-3">{{ jobSeeker.address }}</div>
+    <div class="col-xs-3">{{ jobSeeker.city }}</div>
+    <div class="col-xs-3">{{ jobSeeker.zipCode }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Numéro de téléphone :</div>
+    <div class="col-xs-3">{{ jobSeeker.phoneNumber }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Date de naissance :</div>
+    <div class="col-xs-3">{{ jobSeeker.dateOfBirth|date("d/m/Y") }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Voir le CV :</div>
+    <div class="col-xs-3"><a href="{{ asset(jobSeeker.cv) }}">CV</a></div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Suivi par  :</div>
+    <div class="col-xs-3">{{ jobSeeker.employee.name }} {{ jobSeeker.employee.surName }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Diplômes  :</div>
+    <div class="col-xs-3">
+        {% if jobSeeker.diplomas.count > 0 %}
+        <ul>
+            {% for diploma in jobSeeker.diplomas %}
+            <li>{{ diploma.name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-3 bold">Compétencee  :</div>
+    <div class="col-xs-3">
+        {% if jobSeeker.skills.count > 0 %}
+        <ul>
+            {% for skill in jobSeeker.skills %}
+            <li>{{ skill.name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

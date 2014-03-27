@@ -1,0 +1,37 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Offres {{ parent() }}{% endblock %}
+{% block function %}Offres{% endblock %}
+
+{% block body %}
+
+{% for message in app.session.flashbag.get('info') %}
+<p class="bg-success">{{ message }}</p>
+{% endfor %}
+
+<div class="row" id="btns">
+    <div class="col-xs-12">
+        <a href="{{ path('interim_informatique_add_job') }}" class="btn btn-primary btn-sm">Ajouter une offre</a>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Poste</th>
+            <th>Entreprise</th>
+            <th>Types de contrat</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+          {% for job in jobs %}
+
+        <tr>
+            <td>{{ job.postName }}</td>
+            <td>{{ job.company.name }}</td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

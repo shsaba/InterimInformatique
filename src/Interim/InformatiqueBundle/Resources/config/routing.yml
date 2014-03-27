@@ -16,7 +16,7 @@ interim_informatique_add_jobseeker:
 
 interim_informatique_infos_jobseeker:
     pattern:  /collaborateur/{id}
-    defaults: { _controller: InterimInformatiqueBundle:JobSeeker:see }
+    defaults: { _controller: InterimInformatiqueBundle:JobSeeker:infos }
     requirements:
         id : \d+
 
@@ -36,11 +36,23 @@ interim_informatique_infos_company:
     requirements:
         id : \d+
 
+
 # Jobs
 interim_informatique_jobs:
     pattern:  /offres
     defaults: { _controller: InterimInformatiqueBundle:Job:index }
 
+
+interim_informatique_add_job:
+    pattern:  /offre/ajouter
+    defaults: { _controller: InterimInformatiqueBundle:Job:add }
+
+
+interim_informatique_infos_job:
+    pattern:  /offre/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Job:infos }
+    requirements:
+        id : \d+
 
 
 # Configuration Routing

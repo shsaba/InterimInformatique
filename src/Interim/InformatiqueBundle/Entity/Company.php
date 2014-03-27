@@ -219,7 +219,7 @@ class Company
      * @return string 
      */
     public function getLogo() {
-        return $this->getUploadDir() . '/' . $this->id . '.' . $this->logo;
+        return $this->getUploadDir() . $this->id . '.' . $this->logo;
     }
 
     /**
@@ -413,7 +413,6 @@ class Company
         $this->file->move(
                 $this->getUploadRootDir(), $this->id . '.' . $this->logo
         );
-        $this->logo = $this->id . '.' . $this->logo;
     }
 
     /**

@@ -14,7 +14,7 @@ class JobSeekerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('InterimInformatiqueBundle:JobSeeker');
 
-        $jobSeekers = $repo->findAll();
+        $jobSeekers = $repo->getJobSeekersWithEmployee();
 
         return $this->render('InterimInformatiqueBundle:JobSeeker:index.html.twig', array(
                     'jobSeekers' => $jobSeekers
@@ -36,12 +36,25 @@ class JobSeekerController extends Controller
             if ($form->isValid()) {
                 $em->persist($jobSeeker);
                 $em->flush();
+                $this->get('session')->getFlashBag()->add('info', 'Le collaborateur a bien été enregistré');
+                return $this->redirect($this->generateUrl('interim_informatique_jobseekers'));
             }
         }
         return $this->render('InterimInformatiqueBundle:JobSeeker:add.html.twig', array(
-            'form' => $form->createView()
-                )
+                    'form' => $form->createView()
+                        )
         );
+    }
+
+    public function infosAction($id) {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $repo = $em->getRepository('InterimInformatiqueBundle:JobSeeker');
+        
+        $jobSeeker = $repo->getJobSeekersInfos($id);
+
+        return $this->render('InterimInformatiqueBundle:JobSeeker:infos.html.twig', array('jobSeeker' => $jobSeeker));
     }
 
 }

@@ -5,13 +5,15 @@ namespace Interim\InformatiqueBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Interim\InformatiqueBundle\Entity\Employee;
 use Interim\InformatiqueBundle\Entity\Diploma;
-use Interim\InformatiqueBundle\Entity\Skills;
+use Interim\InformatiqueBundle\Entity\Skill;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * JobSeeker
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\JobSeekerRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class JobSeeker
 {
@@ -80,6 +82,8 @@ class JobSeeker
      * @ORM\Column(name="cv", type="string", length=255)
      */
     private $cv;
+    private $file;
+    private $tempFilename;
 
     /**
      * @var string
@@ -114,25 +118,23 @@ class JobSeeker
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Diploma", cascade={"persist"})
      */
     private $diplomas;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skill", cascade={"persist"})
      */
     private $skills;
-    
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -142,8 +144,7 @@ class JobSeeker
      * @param string $name
      * @return JobSeeker
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -154,8 +155,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -165,8 +165,7 @@ class JobSeeker
      * @param string $surname
      * @return JobSeeker
      */
-    public function setSurname($surname)
-    {
+    public function setSurname($surname) {
         $this->surname = $surname;
 
         return $this;
@@ -177,8 +176,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getSurname()
-    {
+    public function getSurname() {
         return $this->surname;
     }
 
@@ -188,8 +186,7 @@ class JobSeeker
      * @param string $mail
      * @return JobSeeker
      */
-    public function setMail($mail)
-    {
+    public function setMail($mail) {
         $this->mail = $mail;
 
         return $this;
@@ -200,8 +197,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getMail()
-    {
+    public function getMail() {
         return $this->mail;
     }
 
@@ -211,8 +207,7 @@ class JobSeeker
      * @param string $address
      * @return JobSeeker
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
 
         return $this;
@@ -223,8 +218,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -234,8 +228,7 @@ class JobSeeker
      * @param string $city
      * @return JobSeeker
      */
-    public function setCity($city)
-    {
+    public function setCity($city) {
         $this->city = $city;
 
         return $this;
@@ -246,8 +239,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getCity()
-    {
+    public function getCity() {
         return $this->city;
     }
 
@@ -257,8 +249,7 @@ class JobSeeker
      * @param string $zipCode
      * @return JobSeeker
      */
-    public function setZipCode($zipCode)
-    {
+    public function setZipCode($zipCode) {
         $this->zipCode = $zipCode;
 
         return $this;
@@ -269,8 +260,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getZipCode()
-    {
+    public function getZipCode() {
         return $this->zipCode;
     }
 
@@ -280,8 +270,7 @@ class JobSeeker
      * @param \DateTime $dateOfBirth
      * @return JobSeeker
      */
-    public function setDateOfBirth($dateOfBirth)
-    {
+    public function setDateOfBirth($dateOfBirth) {
         $this->dateOfBirth = $dateOfBirth;
 
         return $this;
@@ -292,8 +281,7 @@ class JobSeeker
      *
      * @return \DateTime 
      */
-    public function getDateOfBirth()
-    {
+    public function getDateOfBirth() {
         return $this->dateOfBirth;
     }
 
@@ -303,8 +291,7 @@ class JobSeeker
      * @param string $cv
      * @return JobSeeker
      */
-    public function setCv($cv)
-    {
+    public function setCv($cv) {
         $this->cv = $cv;
 
         return $this;
@@ -315,9 +302,10 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getCv()
-    {
-        return $this->cv;
+    public function getCv() {
+        $fileName = str_replace(' ', '', $this->id . '.' . $this->name . '.' . $this->cv);
+        return $this->getUploadDir() . $fileName;
+        //return $this->cv;
     }
 
     /**
@@ -326,8 +314,7 @@ class JobSeeker
      * @param string $username
      * @return JobSeeker
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->username = $username;
 
         return $this;
@@ -338,8 +325,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
@@ -349,8 +335,7 @@ class JobSeeker
      * @param string $password
      * @return JobSeeker
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
 
         return $this;
@@ -361,8 +346,7 @@ class JobSeeker
      *
      * @return string 
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
@@ -372,8 +356,7 @@ class JobSeeker
      * @param integer $phoneNumber
      * @return JobSeeker
      */
-    public function setPhoneNumber($phoneNumber)
-    {
+    public function setPhoneNumber($phoneNumber) {
         $this->phoneNumber = $phoneNumber;
 
         return $this;
@@ -384,8 +367,7 @@ class JobSeeker
      *
      * @return integer 
      */
-    public function getPhoneNumber()
-    {
+    public function getPhoneNumber() {
         return $this->phoneNumber;
     }
 
@@ -395,8 +377,7 @@ class JobSeeker
      * @param boolean $available
      * @return JobSeeker
      */
-    public function setAvailable($available)
-    {
+    public function setAvailable($available) {
         $this->available = $available;
 
         return $this;
@@ -407,15 +388,14 @@ class JobSeeker
      *
      * @return boolean 
      */
-    public function getAvailable()
-    {
+    public function getAvailable() {
         return $this->available;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->diplomas = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -426,8 +406,7 @@ class JobSeeker
      * @param \Interim\InformatiqueBundle\Entity\Employee $employee
      * @return JobSeeker
      */
-    public function setEmployee(\Interim\InformatiqueBundle\Entity\Employee $employee)
-    {
+    public function setEmployee(Employee $employee) {
         $this->employee = $employee;
 
         return $this;
@@ -438,8 +417,7 @@ class JobSeeker
      *
      * @return \Interim\InformatiqueBundle\Entity\Employee 
      */
-    public function getEmployee()
-    {
+    public function getEmployee() {
         return $this->employee;
     }
 
@@ -449,8 +427,7 @@ class JobSeeker
      * @param \Interim\InformatiqueBundle\Entity\Diploma $diplomas
      * @return JobSeeker
      */
-    public function addDiploma(\Interim\InformatiqueBundle\Entity\Diploma $diplomas)
-    {
+    public function addDiploma(Diploma $diplomas) {
         $this->diplomas[] = $diplomas;
 
         return $this;
@@ -461,8 +438,7 @@ class JobSeeker
      *
      * @param \Interim\InformatiqueBundle\Entity\Diploma $diplomas
      */
-    public function removeDiploma(\Interim\InformatiqueBundle\Entity\Diploma $diplomas)
-    {
+    public function removeDiploma(Diploma $diplomas) {
         $this->diplomas->removeElement($diplomas);
     }
 
@@ -471,19 +447,17 @@ class JobSeeker
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDiplomas()
-    {
+    public function getDiplomas() {
         return $this->diplomas;
     }
 
     /**
      * Add skills
      *
-     * @param \Interim\InformatiqueBundle\Entity\Skills $skills
+     * @param \Interim\InformatiqueBundle\Entity\Skill $skills
      * @return JobSeeker
      */
-    public function addSkill(\Interim\InformatiqueBundle\Entity\Skills $skills)
-    {
+    public function addSkill(Skill $skills) {
         $this->skills[] = $skills;
 
         return $this;
@@ -492,10 +466,9 @@ class JobSeeker
     /**
      * Remove skills
      *
-     * @param \Interim\InformatiqueBundle\Entity\Skills $skills
+     * @param \Interim\InformatiqueBundle\Entity\Skill $skills
      */
-    public function removeSkill(\Interim\InformatiqueBundle\Entity\Skills $skills)
-    {
+    public function removeSkill(Skill $skills) {
         $this->skills->removeElement($skills);
     }
 
@@ -504,8 +477,82 @@ class JobSeeker
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getSkills()
-    {
+    public function getSkills() {
         return $this->skills;
     }
+
+    public function setFile(UploadedFile $file) {
+        $this->file = $file;
+
+        if (null !== $this->cv) {
+            $$this->tempFilename = $this->cv;
+            $this->cv = null;
+        }
+    }
+
+    public function getFile() {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload() {
+        if (null === $this->file) {
+            return;
+        }
+        $this->cv = $this->file->getClientOriginalName();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload() {
+        if (null === $this->file) {
+            return;
+        }
+
+        if (null !== $this->tempFilename) {
+            $oldFile = $this->getUploadRootDir() . '/' . $this->tempFilename;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $fileName = str_replace(' ', '', $this->id . '.' . $this->name . '.' . $this->cv);
+        $this->file->move(
+                $this->getUploadRootDir(), $fileName
+        );
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function preRemoveUpload() {
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->cv;
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload() {
+        if (file_exists($this->tempFilename)) {
+            unlink($this->tempFilename);
+        }
+    }
+
+    public function getUploadDir() {
+        return 'uploads/cvs/';
+    }
+
+    protected function getUploadRootDir() {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    public function getWebPath() {
+        return $this->getUploadRootDir() . $this->cv;
+    }
+
 }

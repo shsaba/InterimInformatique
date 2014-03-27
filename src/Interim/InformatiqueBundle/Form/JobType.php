@@ -26,7 +26,7 @@ class JobType extends AbstractType
                 ->add('contractStartDate')
                 ->add('contractEndDate')
                 ->add('skills', 'entity', array(
-                    'class' => 'InterimInformatiqueBundle:Skills',
+                    'class' => 'InterimInformatiqueBundle:Skill',
                     'property' => 'name',
                     'multiple' => true))
                 ->add('diplomaLevels', 'entity', array(
