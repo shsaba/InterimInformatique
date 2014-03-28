@@ -55,4 +55,26 @@ class JobSeekerController extends Controller
         return $this->render('InterimInformatiqueBundle:JobSeeker:infos.html.twig', array('jobSeeker' => $jobSeeker));
     }
 
+     public function editAction(JobSeeker $jobSeeker)
+    {
+        $form = $this->createForm(new JobSeekerType, $jobSeeker);
+
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == "POST") {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('info', 'Le collaborateur a bien été modifiée');
+                return $this->redirect($this->generateUrl('interim_informatique_infos_jobseeker', array(
+                                    'id' => $jobSeeker->getId())));
+            }
+        }
+        return $this->render('InterimInformatiqueBundle:JobSeeker:edit.html.twig', array(
+                    'form' => $form->createView()
+        ));
+    }
+
 }

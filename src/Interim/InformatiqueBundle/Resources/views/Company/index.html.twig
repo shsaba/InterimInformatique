@@ -5,7 +5,7 @@
 {% block body %}
 
 {% for message in app.session.flashbag.get('info') %}
-    <p class="bg-success">{{ message }}</p>
+<p class="bg-success">{{ message }}</p>
 {% endfor %}
 
 <div class="row" id="btns">
@@ -20,6 +20,7 @@
             <th>Contact</th>
             <th>Secteur</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,8 @@
             <td>{{ company.businessSector.name }} </td>
             <td><a href="{{ asset(company.logo) }}" class="btn btn-default btn-xs">Logo</a></td>
             <td><a href="{{ path('interim_informatique_infos_company', {id : company.id }) }}" class="btn btn-info btn-xs">Infos</a></td>
+            <td><a href="{{ path('interim_informatique_edit_company', {id : company.id }) }}" class="btn btn-info btn-xs">Editer</a></td>
+
         </tr>
 {% endfor %}
     </tbody>

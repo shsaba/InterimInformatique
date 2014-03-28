@@ -35,7 +35,7 @@ class SkillController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($skill);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('info', 'La compétence a bien été enregistré');
+                $this->get('session')->getFlashBag()->add('info', 'La compétence a bien été enregistrée');
                 return $this->redirect($this->generateUrl('interim_informatique_configuration_skills'));
             }
         }

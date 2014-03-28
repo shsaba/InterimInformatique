@@ -20,6 +20,11 @@ interim_informatique_infos_jobseeker:
     requirements:
         id : \d+
 
+interim_informatique_edit_jobseeker:
+    pattern:  /collaborateur/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:JobSeeker:edit }
+    requirements:
+        id : \d+
 
 # Companies
 interim_informatique_companies:
@@ -36,6 +41,11 @@ interim_informatique_infos_company:
     requirements:
         id : \d+
 
+interim_informatique_edit_company:
+    pattern:  /entreprise/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Company:edit }
+    requirements:
+        id : \d+
 
 # Jobs
 interim_informatique_jobs:
@@ -54,6 +64,11 @@ interim_informatique_infos_job:
     requirements:
         id : \d+
 
+interim_informatique_edit_job:
+    pattern:  /offre/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Job:edit }
+    requirements:
+        id : \d+
 
 # Configuration Routing
 
@@ -80,10 +95,6 @@ interim_informatique_configuration_diplomas:
 interim_informatique_configuration_diplomas_levels:
     pattern:  /configuration/niveaux-diplomes
     defaults: { _controller: InterimInformatiqueBundle:DiplomaLevel:index }
-
-interim_informatique_configuration_companies:
-    pattern:  /configuration/entreprises
-    defaults: { _controller: InterimInformatiqueBundle:Company:index }
 
 
 # Add
@@ -150,5 +161,43 @@ interim_informatique_configuration_infos_diploma_level:
 interim_informatique_configuration_infos_skill:
     pattern:  /configuration/competence/{id}
     defaults: { _controller: InterimInformatiqueBundle:Skill:infos }
+    requirements:
+        id : \d+
+
+# Edit
+
+interim_informatique_configuration_edit_employee:
+    pattern:  /configuration/employe/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Employee:edit }
+    requirements:
+        id : \d+   
+        
+interim_informatique_configuration_edit_business_sector:
+    pattern:  /configuration/secteur-activite/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:BusinessSector:edit }
+    requirements:
+        id : \d+
+        
+interim_informatique_configuration_edit_kind_contract:
+    pattern:  /configuration/type-de-contrat/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:KindContract:edit }
+    requirements:
+        id : \d+
+        
+interim_informatique_configuration_edit_diploma:
+    pattern:  /configuration/diplome/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Diploma:edit }
+    requirements:
+        id : \d+
+        
+interim_informatique_configuration_edit_diploma_level:
+    pattern:  /configuration/niveau-diplome/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:DiplomaLevel:edit }
+    requirements:
+        id : \d+
+        
+interim_informatique_configuration_edit_skill:
+    pattern:  /configuration/competence/modifier/{id}
+    defaults: { _controller: InterimInformatiqueBundle:Skill:edit }
     requirements:
         id : \d+

@@ -35,7 +35,7 @@ class CompanyController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($company);
                 $em->flush();
-                $this->get('session')->getFlashBag()->add('info', 'L\'entreprise a bien été enregistré');
+                $this->get('session')->getFlashBag()->add('info', 'L\'entreprise a bien été enregistrée');
                 return $this->redirect($this->generateUrl('interim_informatique_configuration_companies'));
             }
         }
@@ -52,6 +52,30 @@ class CompanyController extends Controller
         $company = $repo->getCompanyWithBusinessSector($id);
 
         return $this->render('InterimInformatiqueBundle:Company:infos.html.twig', array('company' => $company));
+    }
+    
+    
+    
+     public function editAction(Company $company)
+    {
+        $form = $this->createForm(new CompanyType, $company);
+
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == "POST") {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('info', 'L\'entreprise a bien été modifiée');
+                return $this->redirect($this->generateUrl('interim_informatique_infos_company', array(
+                                    'id' => $company->getId())));
+            }
+        }
+        return $this->render('InterimInformatiqueBundle:Company:edit.html.twig', array(
+                    'form' => $form->createView()
+        ));
     }
 
 }
