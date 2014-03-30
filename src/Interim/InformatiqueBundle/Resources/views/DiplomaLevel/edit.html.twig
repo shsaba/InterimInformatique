@@ -1,0 +1,11 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Modifier un niveau de diplômes {{ parent() }}{% endblock %}
+{% block function %}Modifier un niveau de diplômes{% endblock %}
+
+{% block body %}
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_configuration_diplomas_levels') }}" class="btn btn-primary btn-sm">Retour</a></div>
+</div>
+{% include 'InterimInformatiqueBundle:modules:form.html.twig' %}
+
+{% endblock %}

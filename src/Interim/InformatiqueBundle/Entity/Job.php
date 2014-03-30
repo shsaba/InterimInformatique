@@ -3,12 +3,18 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Interim\InformatiqueBundle\Entity\Skill;
+use Interim\InformatiqueBundle\Entity\DiplomaLevel;
+use Interim\InformatiqueBundle\Entity\Company;
+use Interim\InformatiqueBundle\Entity\KindContract;
 
 /**
  * Job
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\JobRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Job
 {
@@ -49,6 +55,8 @@ class Job
      * @ORM\Column(name="postSheet", type="string", length=255)
      */
     private $postSheet;
+    private $file;
+    private $tempFilename;
 
     /**
      * @var string
@@ -204,7 +212,9 @@ class Job
      */
     public function getPostSheet()
     {
-        return $this->postSheet;
+        $fileName = str_replace(' ', '', $this->id . '.' . $this->postSheet);
+        return $this->getUploadDir() . $fileName;
+        //return $this->postSheet;
     }
 
     /**
@@ -338,7 +348,7 @@ class Job
      * @param \Interim\InformatiqueBundle\Entity\Skill $skills
      * @return Job
      */
-    public function addSkill(\Interim\InformatiqueBundle\Entity\Skill $skills)
+    public function addSkill(Skill $skills)
     {
         $this->skills[] = $skills;
 
@@ -350,7 +360,7 @@ class Job
      *
      * @param \Interim\InformatiqueBundle\Entity\Skill $skills
      */
-    public function removeSkill(\Interim\InformatiqueBundle\Entity\Skill $skills)
+    public function removeSkill(Skill $skills)
     {
         $this->skills->removeElement($skills);
     }
@@ -371,7 +381,7 @@ class Job
      * @param \Interim\InformatiqueBundle\Entity\DiplomaLevel $diplomaLevels
      * @return Job
      */
-    public function addDiplomaLevel(\Interim\InformatiqueBundle\Entity\DiplomaLevel $diplomaLevels)
+    public function addDiplomaLevel(DiplomaLevel $diplomaLevels)
     {
         $this->diplomaLevels[] = $diplomaLevels;
 
@@ -404,7 +414,7 @@ class Job
      * @param \Interim\InformatiqueBundle\Entity\Company $company
      * @return Job
      */
-    public function setCompany(\Interim\InformatiqueBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -427,7 +437,7 @@ class Job
      * @param \Interim\InformatiqueBundle\Entity\KindContract $kindContracts
      * @return Job
      */
-    public function addKindContract(\Interim\InformatiqueBundle\Entity\KindContract $kindContracts)
+    public function addKindContract(KindContract $kindContracts)
     {
         $this->kindContracts[] = $kindContracts;
 
@@ -439,7 +449,7 @@ class Job
      *
      * @param \Interim\InformatiqueBundle\Entity\KindContract $kindContracts
      */
-    public function removeKindContract(\Interim\InformatiqueBundle\Entity\KindContract $kindContracts)
+    public function removeKindContract(KindContract $kindContracts)
     {
         $this->kindContracts->removeElement($kindContracts);
     }
@@ -452,6 +462,89 @@ class Job
     public function getKindContracts()
     {
         return $this->kindContracts;
+    }
+
+    public function setFile(UploadedFile $file)
+    {
+        $this->file = $file;
+
+        if (null !== $this->cv) {
+            $$this->tempFilename = $this->postSheet;
+            $this->postSheet = null;
+        }
+    }
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+        $this->postSheet = $this->file->getClientOriginalName();
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        if (null !== $this->tempFilename) {
+            $oldFile = $this->getUploadRootDir() . '/' . $this->tempFilename;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $fileName = str_replace(' ', '', $this->id . '.' . $this->postSheet);
+        $this->file->move(
+                $this->getUploadRootDir(), $fileName
+        );
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function preRemoveUpload()
+    {
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->postSheet;
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if (file_exists($this->tempFilename)) {
+            unlink($this->tempFilename);
+        }
+    }
+
+    public function getUploadDir()
+    {
+        return 'uploads/jobs/';
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    public function getWebPath()
+    {
+        return $this->getUploadRootDir() . $this->postSheet;
     }
 
 }

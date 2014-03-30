@@ -1,0 +1,25 @@
+{% extends '::layout.html.twig' %}
+{% block title %}Employé : {{ employee.name }}  {{ parent() }}{% endblock %}
+{% block function %}Employé : {{ employee.name }}{% endblock %}
+
+{% block body %}
+
+{% for message in app.session.flashbag.get('info') %}
+    <p class="bg-success">{{ message }}</p>
+{% endfor %}
+    
+    
+<div class="row" id="btns">
+    <div class="col-xs-12"><a href="{{ path('interim_informatique_configuration_employees') }}" class="btn btn-primary btn-sm">Retour</a></div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Nom / Prénom:</div>
+    <div class="col-xs-3">{{ employee.name }}</div>
+     <div class="col-xs-3">{{ employee.surname }}</div>
+</div>
+<div class="row">
+    <div class="col-xs-3 bold">Mail :</div>
+    <div class="col-xs-9">{{ employee.mail }}</div>
+</div>
+
+{% endblock %}

@@ -19,7 +19,7 @@ class JobType extends AbstractType
                 ->add('postName', 'text')
                 ->add('description', 'textarea')
                 ->add('profile', 'textarea')
-                ->add('postSheet', 'file')
+                ->add('file', 'file')
                 ->add('address', 'text')
                 ->add('city', 'text')
                 ->add('zipCode', 'text')

@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Interim\InformatiqueBundle\Entity\Diploma;
 use Interim\InformatiqueBundle\Form\DiplomaType;
 
-
 class DiplomaController extends Controller
 {
 
-    public function indexAction() {
+    public function indexAction()
+    {
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('InterimInformatiqueBundle:Diploma');
@@ -22,7 +22,8 @@ class DiplomaController extends Controller
         ));
     }
 
-    public function addAction() {
+    public function addAction()
+    {
 
         $diploma = new Diploma();
 
@@ -44,6 +45,27 @@ class DiplomaController extends Controller
                     'form' => $form->createView()
                         )
         );
+    }
+
+    public function editAction(Diploma $diploma)
+    {
+        $form = $this->createForm(new DiplomaType, $diploma);
+
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == "POST") {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('info', 'Le diplôme a bien été modifié');
+                return $this->redirect($this->generateUrl('interim_informatique_configuration_diplomas'));
+            }
+        }
+        return $this->render('InterimInformatiqueBundle:Diploma:edit.html.twig', array(
+                    'form' => $form->createView()
+        ));
     }
 
 }

@@ -46,4 +46,24 @@ class DiplomaLevelController extends Controller
         );
     }
 
+    public function editAction(DiplomaLevel $diplomaLevel)
+    {
+        $form = $this->createForm(new DiplomaLevelType, $diplomaLevel);
+
+        $request = $this->getRequest();
+
+        if ($request->getMethod() == "POST") {
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('info', 'Le niveau de diplômes a bien été modifié');
+                return $this->redirect($this->generateUrl('interim_informatique_configuration_diplomas_levels'));
+            }
+        }
+        return $this->render('InterimInformatiqueBundle:DiplomaLevel:edit.html.twig', array(
+                    'form' => $form->createView()
+        ));
+    }
 }

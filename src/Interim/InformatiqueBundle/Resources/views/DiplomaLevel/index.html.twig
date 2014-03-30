@@ -21,6 +21,7 @@
         <tr>
             <th>Nom</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
         <tr>
             <td>{{ diplomaLevel.name }}</td>
             <td><a href="{{ path('interim_informatique_configuration_infos_diploma_level', {id : diplomaLevel.id }) }}" class="btn btn-info btn-xs">Infos</a></td>
+            <td><a href="{{ path('interim_informatique_configuration_edit_diploma_level', {id : diplomaLevel.id }) }}" class="btn btn-info btn-xs">Editer</a></td>
         </tr>
 {% endfor %}
     </tbody>
