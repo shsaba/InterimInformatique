@@ -28,6 +28,12 @@ class DiplomaLevel
      */
     private $name;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="phoneNumber", type="integer")
+     */
+    private $order;
 
     /**
      * Get id
@@ -60,5 +66,28 @@ class DiplomaLevel
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set order
+     *
+     * @param integer $order
+     * @return DiplomaLevel
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return integer 
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

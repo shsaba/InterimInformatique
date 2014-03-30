@@ -100,9 +100,9 @@ class JobSeeker
     private $password;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="phoneNumber", type="integer")
+     * @ORM\Column(name="phoneNumber", type="string", length=255)
      */
     private $phoneNumber;
 
