@@ -3,17 +3,17 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
  * Employee
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\EmployeeRepository")
- * @UniqueEntity(fields="idNumber", message="Ce nom d'utilisateur existe déjà.")
  */
-class Employee
+class Employee extends BaseUser
 {
+
     /**
      * @var integer
      *
@@ -21,42 +21,28 @@ class Employee
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="surname", type="string", length=255)
      */
-    private $surname;
+    protected $surname;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=255)
-     */
-    private $mail;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="idNumber", type="string", length=255, unique=true)
-     */
-    private $idNumber;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
+    public function getParent()
+    {
+        return 'FOSUserBundle';
+    }
 
 
     /**
@@ -77,7 +63,7 @@ class Employee
      */
     public function setName($name)
     {
-        $this->name = strtoupper($name);
+        $this->name = $name;
 
         return $this;
     }
@@ -113,74 +99,5 @@ class Employee
     public function getSurname()
     {
         return $this->surname;
-    }
-
-    /**
-     * Set mail
-     *
-     * @param string $mail
-     * @return Employee
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
-     * Get mail
-     *
-     * @return string 
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
-
-    /**
-     * Set idNumber
-     *
-     * @param string $idNumber
-     * @return Employee
-     */
-    public function setIdNumber($idNumber)
-    {
-        $this->idNumber = $idNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get idNumber
-     *
-     * @return string 
-     */
-    public function getIdNumber()
-    {
-        return $this->idNumber;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Employee
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 }

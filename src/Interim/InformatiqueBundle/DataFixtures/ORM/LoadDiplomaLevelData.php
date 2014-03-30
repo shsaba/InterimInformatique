@@ -5,10 +5,12 @@
 namespace Interim\InformatiqueBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Interim\InformatiqueBundle\Entity\DiplomaLevel;
 
-class LoadDiplomaLevelData implements FixtureInterface
+class LoadDiplomaLevelData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
 
     /**
@@ -28,12 +30,18 @@ class LoadDiplomaLevelData implements FixtureInterface
         foreach ($diplomasLevels as $i => $diplomaLevel) {
             $diplomasLevelsList[$i] = new DiplomaLevel();
             $diplomasLevelsList[$i]->setName($diplomaLevel);
-            $diplomasLevelsList[$i]->setOrder($i);
+            $diplomasLevelsList[$i]->setOrderLevel($i);
 
             $manager->persist($diplomasLevelsList[$i]);
+            $this->addReference($i, $diplomasLevelsList[$i]);
         }
 
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 1;
     }
 
 }
