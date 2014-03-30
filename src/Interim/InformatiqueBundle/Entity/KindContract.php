@@ -3,12 +3,14 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * KindContract
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\KindContractRepository")
+ * @UniqueEntity(fields="name", message="Un type de contrat existe déjà avec ce nom.")
  */
 class KindContract
 {

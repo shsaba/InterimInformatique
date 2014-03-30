@@ -3,12 +3,14 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Skill
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\SkillRepository")
+ * @UniqueEntity(fields="name", message="Une compétence avec ce nom existe déjà.")
  */
 class Skill
 {
@@ -24,7 +26,7 @@ class Skill
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 

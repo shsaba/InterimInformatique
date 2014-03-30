@@ -3,12 +3,14 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Diploma
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\DiplomaRepository")
+ * @UniqueEntity(fields="titre", message="Un diplôme existe déjà avec ce nom.")
  */
 class Diploma
 {
@@ -25,7 +27,7 @@ class Diploma
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      */
     private $name;
 

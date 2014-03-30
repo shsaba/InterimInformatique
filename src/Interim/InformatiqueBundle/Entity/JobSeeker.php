@@ -7,12 +7,14 @@ use Interim\InformatiqueBundle\Entity\Employee;
 use Interim\InformatiqueBundle\Entity\Diploma;
 use Interim\InformatiqueBundle\Entity\Skill;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * JobSeeker
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\JobSeekerRepository")
+ * @UniqueEntity(fields="username", message="Ce nom d'utilisateur existe déjà.")
  * @ORM\HasLifecycleCallbacks
  */
 class JobSeeker
@@ -88,7 +90,7 @@ class JobSeeker
     /**
      * @var string
      *
-     * @ORM\Column(name="username", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 

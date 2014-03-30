@@ -3,12 +3,14 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Employee
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\EmployeeRepository")
+ * @UniqueEntity(fields="idNumber", message="Ce nom d'utilisateur existe déjà.")
  */
 class Employee
 {
@@ -45,7 +47,7 @@ class Employee
     /**
      * @var string
      *
-     * @ORM\Column(name="idNumber", type="string", length=255)
+     * @ORM\Column(name="idNumber", type="string", length=255, unique=true)
      */
     private $idNumber;
 

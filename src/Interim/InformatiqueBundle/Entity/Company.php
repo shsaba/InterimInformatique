@@ -4,12 +4,14 @@ namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Company
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\CompanyRepository")
+ * @UniqueEntity(fields="name", message="Une entreprise existe déjà avec ce nom.")
  * @ORM\HasLifecycleCallbacks
  */
 class Company
@@ -34,7 +36,7 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, unique=true)
      */
     private $address;
 
