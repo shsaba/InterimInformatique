@@ -40,7 +40,7 @@ class JobSeekerType extends AbstractType
                     'label' => 'Code postal',
                     'attr' => array(
                         'class' => 'form-control')))
-                ->add('dateOfBirth', 'date', array(
+                ->add('dateOfBirth', 'birthday', array(
                     'label' => 'Date de naissance',
                     'attr' => array(
                         'class' => 'form-control'))

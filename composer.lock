@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0c0d60212cb7f266da382d95016edb2e",
+    "hash": "25a2793eae7d5c1fa8d27b17f8aea8b1",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -747,12 +747,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817"
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/f8e9255eedc91bc53195de288c9fe640719b2817",
-                "reference": "f8e9255eedc91bc53195de288c9fe640719b2817",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/98953461473facd3bcb486b88cdd87bc5120b218",
+                "reference": "98953461473facd3bcb486b88cdd87bc5120b218",
                 "shasum": ""
             },
             "require": {
@@ -807,7 +807,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-03-18 08:55:34"
+            "time": "2014-04-01 09:27:17"
         },
         {
             "name": "incenteev/composer-parameter-handler",

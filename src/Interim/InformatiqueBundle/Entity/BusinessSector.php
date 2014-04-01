@@ -4,6 +4,7 @@ namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * BusinessSector
@@ -25,8 +26,11 @@ class BusinessSector
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(
+     *      min = "2",
+     *      minMessage = "Le nom du secteur d'activité doit avoir {{ limit }} caractères au minimum.",
+     * )
      */
     private $name;
 

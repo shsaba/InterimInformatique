@@ -5,6 +5,8 @@ namespace Interim\InformatiqueBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Company
@@ -30,6 +32,10 @@ class Company
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(
+     *      min = "2",
+     *      minMessage = "Le nom de l'entreprise doit avoir {{ limit }} caractères au minimum.",
+     * )
      */
     private $name;
 
@@ -37,6 +43,10 @@ class Company
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, unique=true)
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "L'adresse doit avoir {{ limit }} caractères au minimum.",
+     * )
      */
     private $address;
 
@@ -44,6 +54,10 @@ class Company
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "La ville doit avoir {{ limit }} caractères au minimum.",
+     * )
      */
     private $city;
 
@@ -51,6 +65,10 @@ class Company
      * @var integer
      *
      * @ORM\Column(name="zipCode", type="integer")
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le code postal doit avoir {{ limit }} caractères au minimum.",
+     * )
      */
     private $zipCode;
 
@@ -60,6 +78,15 @@ class Company
      * @ORM\Column(name="logo", type="string", length=255)
      */
     private $logo;
+    
+    /**
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/jpg", "application/x-jpg"},
+     *     mimeTypesMessage = "Choisissez un fichier JPG valide."
+     * )
+     * 
+     */
     private $file;
     private $tempFilename;
 
@@ -67,6 +94,10 @@ class Company
      * @var text
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "La description doit avoir {{ limit }} caractères au minimum.",
+     * )
      */
     private $description;
 
@@ -90,20 +121,6 @@ class Company
      * @ORM\Column(name="contactMail", type="string", length=255)
      */
     private $contactMail;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="idNumber", type="string", length=255)
-     */
-    private $idNumber;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\BusinessSector")
@@ -306,48 +323,6 @@ class Company
      */
     public function getContactMail() {
         return $this->contactMail;
-    }
-
-    /**
-     * Set idNumber
-     *
-     * @param string $idNumber
-     * @return Company
-     */
-    public function setIdNumber($idNumber) {
-        $this->idNumber = $idNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get idNumber
-     *
-     * @return string 
-     */
-    public function getIdNumber() {
-        return $this->idNumber;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Company
-     */
-    public function setPassword($password) {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword() {
-        return $this->password;
     }
 
     /**
