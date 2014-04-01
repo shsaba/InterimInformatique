@@ -3,7 +3,6 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Interim\InformatiqueBundle\Entity\JobSeeker;
 
 /**
  * JobSeekerRepository

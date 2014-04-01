@@ -46,14 +46,6 @@ class JobSeekerType extends AbstractType
                         'class' => 'form-control'))
                 )
                 ->add('file', 'file')
-                ->add('username', 'text', array(
-                    'label' => 'Nom d\'utilisateur',
-                    'attr' => array(
-                        'class' => 'form-control')))
-                ->add('password', 'password', array(
-                    'label' => 'Mot de passe',
-                    'attr' => array(
-                        'class' => 'form-control')))
                 ->add('phoneNumber', 'text', array(
                     'label' => 'Numéro de téléphone',
                     'attr' => array(
@@ -65,7 +57,7 @@ class JobSeekerType extends AbstractType
                         'class' => 'checkbox-inline'))
                 )
                 ->add('employee', 'entity', array(
-                    'class' => 'InterimInformatiqueBundle:Employee',
+                    'class' => 'InterimEmployeeBundle:Employee',
                     'property' => 'name',
                     'multiple' => false,
                     'label' => 'Conseiller',

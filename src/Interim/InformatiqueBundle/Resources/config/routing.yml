@@ -72,9 +72,7 @@ interim_informatique_edit_job:
 
 # Configuration Routing
 
-interim_informatique_configuration_employees:
-    pattern:  /configuration/employes
-    defaults: { _controller: InterimInformatiqueBundle:Employee:index }
+
 
 interim_informatique_configuration_skills:
     pattern:  /configuration/competences
@@ -99,9 +97,7 @@ interim_informatique_configuration_diplomas_levels:
 
 # Add
 
-interim_informatique_configuration_add_employee:
-    pattern:  /configuration/employe/ajouter
-    defaults: { _controller: InterimInformatiqueBundle:Employee:add }
+
     
 interim_informatique_configuration_add_business_sector:
     pattern:  /configuration/secteur-activite/ajouter
@@ -128,11 +124,7 @@ interim_informatique_configuration_add_skill:
 
 # Get infos
 
-interim_informatique_configuration_infos_employee:
-    pattern:  /configuration/employe/{id}
-    defaults: { _controller: InterimInformatiqueBundle:Employee:infos }
-    requirements:
-        id : \d+
+
 
 interim_informatique_configuration_infos_business_sector:
     pattern:  /configuration/secteur-activite/{id}
@@ -166,11 +158,7 @@ interim_informatique_configuration_infos_skill:
 
 # Edit
 
-interim_informatique_configuration_edit_employee:
-    pattern:  /configuration/employe/modifier/{id}
-    defaults: { _controller: InterimInformatiqueBundle:Employee:edit }
-    requirements:
-        id : \d+   
+ 
         
 interim_informatique_configuration_edit_business_sector:
     pattern:  /configuration/secteur-activite/modifier/{id}

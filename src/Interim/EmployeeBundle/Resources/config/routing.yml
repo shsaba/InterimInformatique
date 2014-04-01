@@ -1,0 +1,39 @@
+interim_informatique_configuration_employees:
+    pattern:  /configuration/employes
+    defaults: { _controller: InterimEmployeeBundle:Employee:index }
+    
+interim_informatique_configuration_add_employee:
+    pattern:  /configuration/employe/ajouter
+    defaults: { _controller: InterimEmployeeBundle:Employee:add }
+
+interim_informatique_configuration_infos_employee:
+    pattern:  /configuration/employe/{id}
+    defaults: { _controller: InterimEmployeeBundle:Employee:infos }
+    requirements:
+        id : \d+
+
+interim_informatique_configuration_edit_employee:
+    pattern:  /configuration/employe/modifier/{id}
+    defaults: { _controller: InterimEmployeeBundle:Employee:edit }
+    requirements:
+        id : \d+  
+
+# Routing FOS
+fos_user_security:
+    resource: "routing/security.xml"
+
+fos_user_profile:
+   resource: "routing/profile.xml"
+   prefix: /profile
+ 
+fos_user_register:
+   resource: "routing/registration.xml"
+   prefix: /register
+ 
+fos_user_resetting:
+   resource: "routing/resetting.xml"
+   prefix: /resetting
+ 
+fos_user_change_password:
+    resource: "routing/change_password.xml"
+    prefix: /profile

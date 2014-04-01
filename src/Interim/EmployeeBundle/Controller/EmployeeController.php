@@ -1,10 +1,10 @@
 <?php
 
-namespace Interim\InformatiqueBundle\Controller;
+namespace Interim\EmployeeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Interim\InformatiqueBundle\Entity\Employee;
-use Interim\InformatiqueBundle\Form\EmployeeType;
+use Interim\EmployeeBundle\Entity\Employee;
+use Interim\EmployeeBundle\Form\EmployeeType;
 
 class EmployeeController extends Controller
 {
@@ -13,11 +13,11 @@ class EmployeeController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('InterimInformatiqueBundle:Employee');
+        $repo = $em->getRepository('InterimEmployeeBundle:Employee');
 
         $employees = $repo->findAll();
 
-        return $this->render('InterimInformatiqueBundle:Employee:index.html.twig', array(
+        return $this->render('InterimEmployeeBundle:Employee:index.html.twig', array(
                     'employees' => $employees
         ));
     }
@@ -41,7 +41,7 @@ class EmployeeController extends Controller
                 return $this->redirect($this->generateUrl('interim_informatique_configuration_employees'));
             }
         }
-        return $this->render('InterimInformatiqueBundle:Employee:add.html.twig', array(
+        return $this->render('InterimEmployeeBundle:Employee:add.html.twig', array(
                     'form' => $form->createView()
                         )
         );
@@ -65,14 +65,14 @@ class EmployeeController extends Controller
                 )));
             }
         }
-        return $this->render('InterimInformatiqueBundle:Employee:edit.html.twig', array(
+        return $this->render('InterimEmployeeBundle:Employee:edit.html.twig', array(
                     'form' => $form->createView()
         ));
     }
 
     public function infosAction(Employee $employee)
     {
-        return $this->render('InterimInformatiqueBundle:Employee:infos.html.twig', array(
+        return $this->render('InterimEmployeeBundle:Employee:infos.html.twig', array(
                     'employee' => $employee));
     }
 

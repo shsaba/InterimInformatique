@@ -17,7 +17,7 @@ class MeetingEmployeeJobSeekerType extends AbstractType
     {
         $builder
                 ->add('employee', 'entity', array(
-                    'class' => 'InterimInformatiqueBundle:Employee',
+                    'class' => 'InterimEmployeeBundle:Employee',
                     'property' => 'name',
                     'multiple' => false))
                 ->add('jobSeeker', 'entity', array(

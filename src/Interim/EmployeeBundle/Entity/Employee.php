@@ -1,15 +1,16 @@
 <?php
 
-namespace Interim\InformatiqueBundle\Entity;
+namespace Interim\EmployeeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Employee
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\EmployeeRepository")
+ * @ORM\Entity(repositoryClass="Interim\EmployeeBundle\Entity\EmployeeRepository")
  */
 class Employee extends BaseUser
 {
@@ -27,6 +28,14 @@ class Employee extends BaseUser
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank(message="Please enter your name.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=3,
+     *     max="255",
+     *     minMessage="The name is too short.",
+     *     maxMessage="The name is too long.",
+     *     groups={"Registration", "Profile"}
+     * )
      */
     protected $name;
 
@@ -34,24 +43,27 @@ class Employee extends BaseUser
      * @var string
      *
      * @ORM\Column(name="surname", type="string", length=255)
+     * @Assert\NotBlank(message="Please enter your surname.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *     min=3,
+     *     max="255",
+     *     minMessage="The surname is too short.",
+     *     maxMessage="The surname is too long.",
+     *     groups={"Registration", "Profile"}
+     * )
      */
     protected $surname;
 
-
-
-    public function getParent()
-    {
+    public function getParent() {
         return 'FOSUserBundle';
     }
-
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -61,8 +73,7 @@ class Employee extends BaseUser
      * @param string $name
      * @return Employee
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -73,8 +84,7 @@ class Employee extends BaseUser
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -84,8 +94,7 @@ class Employee extends BaseUser
      * @param string $surname
      * @return Employee
      */
-    public function setSurname($surname)
-    {
+    public function setSurname($surname) {
         $this->surname = $surname;
 
         return $this;
@@ -96,8 +105,8 @@ class Employee extends BaseUser
      *
      * @return string 
      */
-    public function getSurname()
-    {
+    public function getSurname() {
         return $this->surname;
     }
+
 }

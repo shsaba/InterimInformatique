@@ -1,7 +1,2 @@
 parameters:
 #    interim_informatique.example.class: Interim\InformatiqueBundle\Example
-
-services:
-#    interim_informatique.example:
-#        class: %interim_informatique.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

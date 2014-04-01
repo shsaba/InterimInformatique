@@ -1,6 +1,6 @@
 <?php
 
-namespace Interim\InformatiqueBundle\Entity;
+namespace Interim\EmployeeBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 

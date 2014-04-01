@@ -1,0 +1,9 @@
+parameters:
+#    interim_employee.example.class: Interim\EmployeeBundle\Example
+
+services:
+    interim_user.registration.form.type:
+        class: Interim\EmployeeBundle\Form\EmployeeType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: interim_employeebundle_employee_registration }

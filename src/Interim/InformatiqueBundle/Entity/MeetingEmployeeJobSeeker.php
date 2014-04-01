@@ -12,7 +12,7 @@ class MeetingEmployeeJobSeeker
 
     /**
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\Employee")
+     * @ORM\ManyToOne(targetEntity="Interim\EmployeeBundle\Entity\Employee")
      */
     private $employee;
 
@@ -85,10 +85,10 @@ class MeetingEmployeeJobSeeker
     /**
      * Set employee
      *
-     * @param \Interim\InformatiqueBundle\Entity\Employee $employee
+     * @param \Interim\EmployeeBundle\Entity\Employee $employee
      * @return MeetingEmployeeJobSeeker
      */
-    public function setEmployee(\Interim\InformatiqueBundle\Entity\Employee $employee)
+    public function setEmployee(\Interim\EmployeeBundle\Entity\Employee $employee)
     {
         $this->employee = $employee;
 
@@ -98,7 +98,7 @@ class MeetingEmployeeJobSeeker
     /**
      * Get employee
      *
-     * @return \Interim\InformatiqueBundle\Entity\Employee 
+     * @return \Interim\EmployeeBundle\Entity\Employee 
      */
     public function getEmployee()
     {

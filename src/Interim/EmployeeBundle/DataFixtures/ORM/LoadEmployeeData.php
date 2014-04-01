@@ -1,12 +1,12 @@
 <?php
 
-// src/Interim/InformatiqueBundle/DataFixtures/ORM/LoadEmployeeData.php
+// src/Interim/EmployeeBundle/DataFixtures/ORM/LoadEmployeeData.php
 
-namespace Interim\InformatiqueBundle\DataFixtures\ORM;
+namespace Interim\EmployeeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Interim\InformatiqueBundle\Entity\Employee;
+use Interim\EmployeeBundle\Entity\Employee;
 
 class LoadEmployeeData implements FixtureInterface
 {

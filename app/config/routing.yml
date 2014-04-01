@@ -1,4 +1,7 @@
+interim_employee:
+    resource: "@InterimEmployeeBundle/Resources/config/routing.yml"
+    prefix:   /
+
 interim_informatique:
     resource: "@InterimInformatiqueBundle/Resources/config/routing.yml"
     prefix:   /
-

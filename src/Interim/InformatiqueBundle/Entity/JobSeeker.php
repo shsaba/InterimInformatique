@@ -3,7 +3,7 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Interim\InformatiqueBundle\Entity\Employee;
+use Interim\EmployeeBundle\Entity\Employee;
 use Interim\InformatiqueBundle\Entity\Diploma;
 use Interim\InformatiqueBundle\Entity\Skill;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -87,19 +87,6 @@ class JobSeeker
     private $file;
     private $tempFilename;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
 
     /**
      * @var string
@@ -116,7 +103,7 @@ class JobSeeker
     private $available;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\Employee")
+     * @ORM\ManyToOne(targetEntity="Interim\EmployeeBundle\Entity\Employee")
      * @ORM\JoinColumn(nullable=false)
      */
     private $employee;
@@ -310,47 +297,6 @@ class JobSeeker
         //return $this->cv;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     * @return JobSeeker
-     */
-    public function setUsername($username) {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Get username
-     *
-     * @return string 
-     */
-    public function getUsername() {
-        return $this->username;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return JobSeeker
-     */
-    public function setPassword($password) {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string 
-     */
-    public function getPassword() {
-        return $this->password;
-    }
 
     /**
      * Set phoneNumber
@@ -405,7 +351,7 @@ class JobSeeker
     /**
      * Set employee
      *
-     * @param \Interim\InformatiqueBundle\Entity\Employee $employee
+     * @param \Interim\EmployeeBundle\Entity\Employee $employee
      * @return JobSeeker
      */
     public function setEmployee(Employee $employee) {
@@ -417,7 +363,7 @@ class JobSeeker
     /**
      * Get employee
      *
-     * @return \Interim\InformatiqueBundle\Entity\Employee 
+     * @return \Interim\EmployeeBundle\Entity\Employee 
      */
     public function getEmployee() {
         return $this->employee;
