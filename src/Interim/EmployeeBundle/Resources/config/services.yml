@@ -7,3 +7,9 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: interim_employeebundle_employee_registration }
+
+    interim_user.edit.form.type:
+        class: Interim\EmployeeBundle\Form\EmployeeEditType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: interim_employeebundle_employee_edit_profile }

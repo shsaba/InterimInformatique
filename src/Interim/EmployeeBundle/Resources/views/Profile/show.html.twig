@@ -1,5 +1,12 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
-
+{% block title %}Profil Employé {{ parent() }}{% endblock %}
+{% block function %}Profil Employé {% endblock %}
 {% block fos_user_content %}
+<div class="row" id="btns">
+    <div class="col-xs-12">
+        <a href="{{ path('fos_user_profile_edit') }}" class="btn btn-primary btn-sm">{{ 'profile.edit.action'|trans({}, 'FOSUserBundle')}}</a>
+        <a href="{{ path('fos_user_change_password') }}" class="btn btn-primary btn-sm">{{ 'change_password.action'|trans({}, 'FOSUserBundle') }}</a>
+    </div>
+</div>
 {% include "FOSUserBundle:Profile:show_content.html.twig" %}
 {% endblock fos_user_content %}

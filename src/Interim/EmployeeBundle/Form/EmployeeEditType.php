@@ -4,17 +4,13 @@ namespace Interim\EmployeeBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
-
-class EmployeeType extends BaseType
+class EmployeeEditType extends BaseType
 {
 
-    /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
-     */
     public function buildForm(FormBuilderInterface $builder, array $options) {
+
         $builder
                 ->add('name', 'text')
                 ->add('surname', 'text')
@@ -22,11 +18,8 @@ class EmployeeType extends BaseType
         parent::buildForm($builder, $options);
     }
 
-    
-    
-    
     public function getName() {
-        return 'interim_employeebundle_employee_registration';
+        return 'interim_employeebundle_employee_edit_profile';
     }
 
     /**

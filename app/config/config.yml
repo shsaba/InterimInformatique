@@ -79,3 +79,6 @@ fos_user:
     registration:
         form:
             type: interim_employeebundle_employee_registration
+    profile:
+        form:
+            type: interim_employeebundle_employee_edit_profile

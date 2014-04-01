@@ -4,6 +4,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
+
+<div class="row" id="btns">
+    <div class="col-xs-12">
+        <a href="{{ path('fos_user_resetting_request') }}" class="btn btn-primary btn-sm">Mot de passe perdu ?</a>
+    </div>
+</div>
 {% if error %}
     <div>{{ error|trans }}</div>
 {% endif %}
