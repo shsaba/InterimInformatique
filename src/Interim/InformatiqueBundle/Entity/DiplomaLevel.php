@@ -4,6 +4,7 @@ namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * DiplomaLevel
@@ -27,6 +28,10 @@ class DiplomaLevel
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\Length(
+     *      min = "2",
+     *      minMessage = "Le niveau du diplôme doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $name;
 
@@ -34,6 +39,8 @@ class DiplomaLevel
      * @var integer
      *
      * @ORM\Column(name="orderLevel", type="integer")
+     * @ORM\JoinColumn(nullable=false) 
+     * @Assert\NotNull()
      */
     private $orderLevel;
 

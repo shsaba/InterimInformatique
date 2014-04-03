@@ -3,6 +3,7 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -13,12 +14,14 @@ class MeetingEmployeeJobSeeker
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Interim\EmployeeBundle\Entity\Employee")
+     * @Assert\NotNull()
      */
     private $employee;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\JobSeeker")
+     * @Assert\NotNull()
      */
     private $jobSeeker;
 
@@ -26,12 +29,17 @@ class MeetingEmployeeJobSeeker
      * @var date
      * @ORM\Id
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\Date()
      */
     private $date;
 
     /**
      * @var note
      * @ORM\Column(name="notes", type="text")
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "La note doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $note;
 

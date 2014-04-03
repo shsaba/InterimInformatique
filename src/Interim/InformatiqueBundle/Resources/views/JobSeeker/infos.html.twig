@@ -3,8 +3,16 @@
 {% block function %}Collaborateur : {{ jobSeeker.name }}{% endblock %}
 
 {% block body %}
+
+{% for message in app.session.flashbag.get('info') %}
+<p class="bg-success">{{ message }}</p>
+{% endfor %}
+
 <div class="row" id="btns">
-    <div class="col-xs-12"><a href="{{ path('interim_informatique_jobseekers') }}" class="btn btn-primary btn-sm">Retour</a></div>
+    <div class="col-xs-12">
+    <a href="{{ path('interim_informatique_edit_jobseeker', {id: jobSeeker.id}) }}" class="btn btn-primary btn-sm">Modifier</a>
+    <a href="{{ path('interim_informatique_jobseekers') }}" class="btn btn-primary btn-sm">Retour</a>
+</div>
 </div>
 <div class="row">
     <div class="col-xs-3 bold">Nom :</div>
@@ -54,7 +62,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-3 bold">Compétencee  :</div>
+    <div class="col-xs-3 bold">Compétences  :</div>
     <div class="col-xs-3">
         {% if jobSeeker.skills.count > 0 %}
         <ul>

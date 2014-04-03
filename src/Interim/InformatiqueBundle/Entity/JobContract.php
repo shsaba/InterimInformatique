@@ -3,6 +3,7 @@
 namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -13,18 +14,21 @@ class JobContract
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\JobSeeker")
+     * @Assert\NotNull()
      */
     private $jobSeeker;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\Job")
+     * @Assert\NotNull()
      */
     private $job;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\KindContract")
+     * @Assert\NotNull()
      */
     private $kindContract;
 

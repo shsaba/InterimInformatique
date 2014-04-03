@@ -7,14 +7,13 @@ use Interim\EmployeeBundle\Entity\Employee;
 use Interim\InformatiqueBundle\Entity\Diploma;
 use Interim\InformatiqueBundle\Entity\Skill;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * JobSeeker
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\JobSeekerRepository")
- * @UniqueEntity(fields="username", message="Ce nom d'utilisateur existe déjà.")
  * @ORM\HasLifecycleCallbacks
  */
 class JobSeeker
@@ -33,6 +32,10 @@ class JobSeeker
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le nom du contact doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $name;
 
@@ -40,13 +43,21 @@ class JobSeeker
      * @var string
      *
      * @ORM\Column(name="surname", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le prénom du contact doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $surname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @ORM\Column(name="mail", type="string", length=255, unique=true)
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true
+     * )
      */
     private $mail;
 
@@ -54,6 +65,10 @@ class JobSeeker
      * @var string
      *
      * @ORM\Column(name="address", type="text")
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "L'adresse doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $address;
 
@@ -61,6 +76,10 @@ class JobSeeker
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "La ville doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $city;
 
@@ -68,6 +87,10 @@ class JobSeeker
      * @var integer
      *
      * @ORM\Column(name="zipCode", type="integer")
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le code postal doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $zipCode;
 
@@ -75,6 +98,7 @@ class JobSeeker
      * @var \DateTime
      *
      * @ORM\Column(name="dateOfBirth", type="date")
+     * @Assert\Date()
      */
     private $dateOfBirth;
 
@@ -92,6 +116,11 @@ class JobSeeker
      * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=255)
+     * @Assert\Length(
+     *      min = "10",
+     *      max = "10",
+     *      exactMessage = "Le numéro de téléphone doit comporter {{ limit }} chiffres"
+     * )
      */
     private $phoneNumber;
 
@@ -99,22 +128,26 @@ class JobSeeker
      * @var boolean
      *
      * @ORM\Column(name="available", type="boolean")
+     * @Assert\NotNull()
      */
     private $available;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interim\EmployeeBundle\Entity\Employee")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $employee;
 
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Diploma", cascade={"persist"})
+     * @Assert\NotNull()
      */
     private $diplomas;
 
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skill", cascade={"persist"})
+     * @Assert\NotNull()
      */
     private $skills;
 
@@ -433,7 +466,7 @@ class JobSeeker
         $this->file = $file;
 
         if (null !== $this->cv) {
-            $$this->tempFilename = $this->cv;
+            $this->tempFilename = $this->id . '.' . $this->name . '.' . $this->cv;
             $this->cv = null;
         }
     }
@@ -479,7 +512,7 @@ class JobSeeker
      * @ORM\PreRemove()
      */
     public function preRemoveUpload() {
-        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->cv;
+        $this->tempFilename = $this->getUploadRootDir() . '/' . $this->id . '.' . $this->name . '.' . $this->cv;
     }
 
     /**

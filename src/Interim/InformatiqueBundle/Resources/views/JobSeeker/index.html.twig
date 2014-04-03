@@ -20,7 +20,6 @@
             <th>Prénom</th>
             <th>Suivi par</th>
             <th></th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -29,9 +28,8 @@
         <tr>
             <td>{{ jobSeeker.name }}</td>
             <td>{{ jobSeeker.surname }}</td>
-            <td><a href="{{ path('interim_informatique_configuration_infos_employee', {id : jobSeeker.employee.id }) }}">{{ jobSeeker.employee.name }}</a></td>
+            <td>{{ jobSeeker.employee.name }}</td>
             <td><a href="{{ path('interim_informatique_infos_jobseeker', {id : jobSeeker.id }) }}" class="btn btn-info btn-xs">Infos</a></td>
-            <td><a href="{{ path('interim_informatique_edit_jobseeker', {id : jobSeeker.id }) }}" class="btn btn-info btn-xs">Editer</a></td>
         </tr>
 {% endfor %}
     </tbody>

@@ -4,13 +4,14 @@ namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Diploma
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Interim\InformatiqueBundle\Entity\DiplomaRepository")
- * @UniqueEntity(fields="titre", message="Un diplôme existe déjà avec ce nom.")
+ * @UniqueEntity(fields="name", message="Un diplôme existe déjà avec ce nom.")
  */
 class Diploma
 {
@@ -26,14 +27,18 @@ class Diploma
 
     /**
      * @var string
-     *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\Length(
+     *      min = "2",
+     *      minMessage = "Le nom du diplôme doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\DiplomaLevel", cascade={"remove"})
      * @ORM\JoinColumn(nullable=false) 
+     * @Assert\NotNull()
      */
     private $diplomaLevel;
 

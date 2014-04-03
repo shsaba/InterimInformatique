@@ -17,7 +17,7 @@ class DiplomaLevelType extends AbstractType
     {
         $builder
         ->add('name', 'text')
-        ->add('order', 'text')
+        ->add('orderLevel', 'text')
         ;
     }
 

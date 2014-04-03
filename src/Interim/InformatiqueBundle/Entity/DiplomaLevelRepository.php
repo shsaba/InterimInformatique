@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class DiplomaLevelRepository extends EntityRepository
 {
+
+    public function getDiplomaLevelByOrder($order) {
+        $qb = $this->createQueryBuilder('dl')
+                ->orderBy('dl.orderLevel', $order);
+
+        return $qb;
+    }
+
 }

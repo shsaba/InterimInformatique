@@ -45,7 +45,7 @@ class JobSeekerType extends AbstractType
                     'attr' => array(
                         'class' => 'form-control'))
                 )
-                ->add('file', 'file')
+                ->add('file', 'file', array('required' => false))
                 ->add('phoneNumber', 'text', array(
                     'label' => 'Numéro de téléphone',
                     'attr' => array(

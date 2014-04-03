@@ -4,6 +4,7 @@ namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Skill
@@ -27,6 +28,10 @@ class Skill
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "La compétence doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $name;
 

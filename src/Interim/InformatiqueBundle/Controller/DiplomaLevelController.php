@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Interim\InformatiqueBundle\Entity\DiplomaLevel;
 use Interim\InformatiqueBundle\Form\DiplomaLevelType;
 
-
 class DiplomaLevelController extends Controller
 {
 
@@ -15,7 +14,8 @@ class DiplomaLevelController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('InterimInformatiqueBundle:DiplomaLevel');
 
-        $diplomasLevels = $repo->findAll();
+        $diplomasLevels = $repo->findBy(array(), array('orderLevel' => 'ASC'));
+
 
         return $this->render('InterimInformatiqueBundle:DiplomaLevel:index.html.twig', array(
                     'diplomasLevels' => $diplomasLevels
@@ -46,8 +46,7 @@ class DiplomaLevelController extends Controller
         );
     }
 
-    public function editAction(DiplomaLevel $diplomaLevel)
-    {
+    public function editAction(DiplomaLevel $diplomaLevel) {
         $form = $this->createForm(new DiplomaLevelType, $diplomaLevel);
 
         $request = $this->getRequest();
@@ -66,4 +65,5 @@ class DiplomaLevelController extends Controller
                     'form' => $form->createView()
         ));
     }
+
 }

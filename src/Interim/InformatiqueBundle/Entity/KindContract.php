@@ -4,6 +4,7 @@ namespace Interim\InformatiqueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * KindContract
@@ -27,6 +28,10 @@ class KindContract
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le nom du contrat doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $name;
 

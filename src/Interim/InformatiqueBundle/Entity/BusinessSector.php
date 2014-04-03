@@ -26,10 +26,10 @@ class BusinessSector
 
     /**
      * @var string
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      * @Assert\Length(
      *      min = "2",
-     *      minMessage = "Le nom du secteur d'activité doit avoir {{ limit }} caractères au minimum.",
+     *      minMessage = "Le nom du secteur d'activité doit avoir {{ limit }} caractères au minimum."
      * )
      */
     private $name;

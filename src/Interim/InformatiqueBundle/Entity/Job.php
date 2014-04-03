@@ -9,6 +9,8 @@ use Interim\InformatiqueBundle\Entity\DiplomaLevel;
 use Interim\InformatiqueBundle\Entity\Company;
 use Interim\InformatiqueBundle\Entity\KindContract;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Job
  *
@@ -32,6 +34,10 @@ class Job
      * @var string
      *
      * @ORM\Column(name="postName", type="string", length=255)
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "Le nom du poste doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $postName;
 
@@ -39,6 +45,10 @@ class Job
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\Length(
+     *      min = "50",
+     *      minMessage = "La description doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $description;
 
@@ -46,6 +56,10 @@ class Job
      * @var string
      *
      * @ORM\Column(name="profile", type="text")
+     * @Assert\Length(
+     *      min = "50",
+     *      minMessage = "La description du profil doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $profile;
 
@@ -62,6 +76,10 @@ class Job
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255)
+     * @Assert\Length(
+     *      min = "10",
+     *      minMessage = "L'adresse doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $address;
 
@@ -69,6 +87,10 @@ class Job
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     * @Assert\Length(
+     *      min = "5",
+     *      minMessage = "La ville doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $city;
 
@@ -76,6 +98,10 @@ class Job
      * @var integer
      *
      * @ORM\Column(name="zipCode", type="integer")
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le code postal doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $zipCode;
 
@@ -83,6 +109,7 @@ class Job
      * @var \DateTime
      *
      * @ORM\Column(name="contractStartDate", type="date")
+     * @Assert\Date()
      */
     private $contractStartDate;
 
@@ -90,26 +117,31 @@ class Job
      * @var \DateTime
      *
      * @ORM\Column(name="contractEndDate", type="date")
+     * @Assert\Date()
      */
     private $contractEndDate;
 
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\Skill", cascade={"persist"})
+     * @Assert\NotNull()
      */
     private $skills;
 
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\DiplomaLevel")
+     * @Assert\NotNull()
      */
     private $diplomaLevels;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\Company")
+     * @Assert\NotNull()
      */
     private $company;
 
     /**
      * @ORM\ManyToMany(targetEntity="Interim\InformatiqueBundle\Entity\KindContract")
+     * @Assert\NotNull()
      */
     private $kindContracts;
 
@@ -469,7 +501,7 @@ class Job
         $this->file = $file;
 
         if (null !== $this->cv) {
-            $$this->tempFilename = $this->postSheet;
+            $this->tempFilename = $this->postSheet;
             $this->postSheet = null;
         }
     }

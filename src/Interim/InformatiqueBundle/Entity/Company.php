@@ -31,10 +31,10 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, unique=true)
      * @Assert\Length(
      *      min = "2",
-     *      minMessage = "Le nom de l'entreprise doit avoir {{ limit }} caractères au minimum.",
+     *      minMessage = "Le nom de l'entreprise doit avoir {{ limit }} caractères au minimum."
      * )
      */
     private $name;
@@ -42,10 +42,10 @@ class Company
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255, unique=true)
+     * @ORM\Column(name="address", type="string", length=255)
      * @Assert\Length(
      *      min = "10",
-     *      minMessage = "L'adresse doit avoir {{ limit }} caractères au minimum.",
+     *      minMessage = "L'adresse doit avoir {{ limit }} caractères au minimum."
      * )
      */
     private $address;
@@ -56,7 +56,7 @@ class Company
      * @ORM\Column(name="city", type="string", length=255)
      * @Assert\Length(
      *      min = "3",
-     *      minMessage = "La ville doit avoir {{ limit }} caractères au minimum.",
+     *      minMessage = "La ville doit avoir {{ limit }} caractères au minimum."
      * )
      */
     private $city;
@@ -67,7 +67,7 @@ class Company
      * @ORM\Column(name="zipCode", type="integer")
      * @Assert\Length(
      *      min = "3",
-     *      minMessage = "Le code postal doit avoir {{ limit }} caractères au minimum.",
+     *      minMessage = "Le code postal doit avoir {{ limit }} caractères au minimum."
      * )
      */
     private $zipCode;
@@ -96,7 +96,7 @@ class Company
      * @ORM\Column(name="description", type="text")
      * @Assert\Length(
      *      min = "10",
-     *      minMessage = "La description doit avoir {{ limit }} caractères au minimum.",
+     *      minMessage = "La description doit avoir {{ limit }} caractères au minimum."
      * )
      */
     private $description;
@@ -105,6 +105,10 @@ class Company
      * @var string
      *
      * @ORM\Column(name="contactName", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le nom du contact doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $contactName;
 
@@ -112,18 +116,28 @@ class Company
      * @var string
      *
      * @ORM\Column(name="contactSurname", type="string", length=255)
+     * @Assert\Length(
+     *      min = "3",
+     *      minMessage = "Le prénom du contact doit avoir {{ limit }} caractères au minimum."
+     * )
      */
     private $contactSurname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contactMail", type="string", length=255)
+     * @ORM\Column(name="contactMail", type="string", length=255, unique=true)
+     * @Assert\Email(
+     *     message = "'{{ value }}' n'est pas un email valide.",
+     *     checkMX = true
+     * )
      */
     private $contactMail;
 
     /**
      * @ORM\ManyToOne(targetEntity="Interim\InformatiqueBundle\Entity\BusinessSector")
+     * @ORM\JoinColumn(nullable=false) 
+     * @Assert\NotNull()
      */
     private $businessSector;
 
@@ -350,7 +364,7 @@ class Company
         $this->file = $file;
 
         if (null !== $this->logo) {
-            $$this->tempFilename = $this->logo;
+            $this->tempFilename = $this->logo;
             $this->logo = null;
         }
     }

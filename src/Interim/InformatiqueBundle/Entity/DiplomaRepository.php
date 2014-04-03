@@ -17,8 +17,8 @@ class DiplomaRepository extends EntityRepository
         $qb = $this->createQueryBuilder('d')
                 ->leftJoin('d.diplomaLevel', 'dl')
                 ->addSelect('dl')
-                ->orderBy('d.name', 'DESC')
-                ->orderBy('d.diplomaLevel', 'DESC');
+                ->addOrderBy('dl.orderLevel', 'ASC')
+                ->addOrderBy('d.name', 'ASC');
 
         return $qb->getQuery()->getResult();
     }
