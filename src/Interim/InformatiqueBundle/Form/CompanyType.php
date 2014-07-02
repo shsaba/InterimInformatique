@@ -25,8 +25,6 @@ class CompanyType extends AbstractType
                 ->add('contactName', 'text')
                 ->add('contactSurname', 'text')
                 ->add('contactMail', 'email')
-                ->add('idNumber', 'text')
-                ->add('password', 'password')
                 ->add('businessSector', 'entity', array(
                     'class' => 'InterimInformatiqueBundle:BusinessSector',
                     'property' => 'name',

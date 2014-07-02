@@ -82,7 +82,7 @@ class Company
     /**
      * @Assert\File(
      *     maxSize = "1024k",
-     *     mimeTypes = {"application/jpg", "application/x-jpg"},
+     *     mimeTypes = {"image/jpeg"},
      *     mimeTypesMessage = "Choisissez un fichier JPG valide."
      * )
      * 

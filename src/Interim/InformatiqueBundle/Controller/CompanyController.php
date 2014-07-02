@@ -36,7 +36,7 @@ class CompanyController extends Controller
                 $em->persist($company);
                 $em->flush();
                 $this->get('session')->getFlashBag()->add('info', 'L\'entreprise a bien été enregistrée');
-                return $this->redirect($this->generateUrl('interim_informatique_configuration_companies'));
+                return $this->redirect($this->generateUrl('interim_informatique_companies'));
             }
         }
         return $this->render('InterimInformatiqueBundle:Company:add.html.twig', array(
